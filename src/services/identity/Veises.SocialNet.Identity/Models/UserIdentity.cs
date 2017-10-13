@@ -1,4 +1,6 @@
-﻿namespace Veises.SocialNet.Identity.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Veises.SocialNet.Identity.Models
 {
 	/// <summary>
 	/// User identity model
@@ -8,6 +10,7 @@
 		/// <summary>
 		/// User display name
 		/// </summary>
+		[Required]
 		public string UserName { get; set; }
 	}
 }

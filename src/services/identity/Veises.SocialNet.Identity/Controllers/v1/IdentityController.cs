@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 
 using Veises.SocialNet.Identity.Models;
 
-namespace Veises.SocialNet.Identity.Controllers
+namespace Veises.SocialNet.Identity.Controllers.v1
 {
 	/// <summary>
 	/// User identity controller
 	/// </summary>
 	[Produces("application/json", "application/xml")]
-	[Route("api/Identity")]
+	[Route("api/v1/Identity")]
 	public sealed class IdentityController: Controller
 	{
 		/// <summary>

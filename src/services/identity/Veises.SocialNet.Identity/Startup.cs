@@ -32,7 +32,17 @@ namespace Veises.SocialNet.Identity
 					{
 						Title = "Veises User Identity API",
 						Version = "v1",
-						Description = "User identity API service"
+						Description = "User identity API service",
+						Contact = new Contact
+						{
+							Name = "Maksim Sharonov",
+							Url = "https://github.com/msharonov"
+						},
+						License = new License
+						{
+							Name = "GPL-3.0",
+							Url = "https://raw.githubusercontent.com/msharonov/Veises.SocialNet/master/LICENSE"
+						}
 					});
 
 				var basePath = PlatformServices.Default.Application.ApplicationBasePath;
