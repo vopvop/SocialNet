@@ -28,7 +28,8 @@ Our social network architecture will consider the next microservices list:
 1. User roles management;
 1. Messages storage;
 1. Frontend;
-## Frameworks
+## Frameworks and Tools
+* IDE: Visual Studio 2017
 * ASP.NET Core 2.0;
 * Swagger;
 * Angular 2;
