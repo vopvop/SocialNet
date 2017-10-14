@@ -2,15 +2,16 @@
 
 using Microsoft.AspNetCore.Mvc;
 
-using Veises.SocialNet.Identity.Models;
+using Veises.SocialNet.Identity.Api.V1.Models;
 
-namespace Veises.SocialNet.Identity.Controllers.v1
+namespace Veises.SocialNet.Identity.Api.V1.Controllers
 {
 	/// <summary>
 	/// User identity controller
 	/// </summary>
 	[Produces("application/json", "application/xml")]
-	[Route("api/v1/Identity")]
+	[ApiVersion("1")]
+	[Route("api/v{version:apiVersion}/[controller]")]
 	public sealed class IdentityController: Controller
 	{
 		/// <summary>
