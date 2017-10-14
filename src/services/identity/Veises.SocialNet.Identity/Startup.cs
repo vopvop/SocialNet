@@ -2,8 +2,11 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 
 using Swashbuckle.AspNetCore.Swagger;
@@ -22,28 +25,50 @@ namespace Veises.SocialNet.Identity
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddMvc();
+			services
+				.AddMvcCore()
+				.AddVersionedApiExplorer(o => o.GroupNameFormat = "'v'VVV");
+
+			services
+				.AddMvc(options =>
+				{
+					options.RespectBrowserAcceptHeader = true;
+				})
+				.AddXmlSerializerFormatters()
+				.AddXmlDataContractSerializerFormatters();
+
+			services.AddApiVersioning(c =>
+			{
+				c.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+				c.ReportApiVersions = true;
+			});
 
 			services.AddSwaggerGen(c =>
 			{
-				c.SwaggerDoc(
-					"v1",
-					new Info
-					{
-						Title = "Veises User Identity API",
-						Version = "v1",
-						Description = "User identity API service",
-						Contact = new Contact
+				var provider = services.BuildServiceProvider()
+						   .GetRequiredService<IApiVersionDescriptionProvider>();
+
+				foreach (var description in provider.ApiVersionDescriptions)
+				{
+					c.SwaggerDoc(
+						description.GroupName,
+						new Info()
 						{
-							Name = "Maksim Sharonov",
-							Url = "https://github.com/msharonov"
-						},
-						License = new License
-						{
-							Name = "GPL-3.0",
-							Url = "https://raw.githubusercontent.com/msharonov/Veises.SocialNet/master/LICENSE"
-						}
-					});
+							Title = $"Veises User Identity API {description.ApiVersion}",
+							Description = "User identity API service",
+							Version = description.ApiVersion.ToString(),
+							Contact = new Contact
+							{
+								Name = "Maksim Sharonov",
+								Url = "https://github.com/msharonov"
+							},
+							License = new License
+							{
+								Name = "GPL-3.0",
+								Url = "https://raw.githubusercontent.com/msharonov/Veises.SocialNet/master/LICENSE"
+							}
+						});
+				}
 
 				var basePath = PlatformServices.Default.Application.ApplicationBasePath;
 				var xmlPath = Path.Combine(basePath, "Veises.SocialNet.Identity.xml");
@@ -52,20 +77,32 @@ namespace Veises.SocialNet.Identity
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(
+			IApplicationBuilder app,
+			IHostingEnvironment env,
+			ILoggerFactory loggerFactory,
+			IApiVersionDescriptionProvider provider)
 		{
+			loggerFactory.AddConsole();
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
+
+				loggerFactory.AddDebug(LogLevel.Debug);
 			}
 
+			app.UseMvc();
 			app.UseSwagger();
 			app.UseSwaggerUI(c =>
 			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+				foreach (var description in provider.ApiVersionDescriptions)
+				{
+					c.SwaggerEndpoint(
+						$"/swagger/{description.GroupName}/swagger.json",
+						description.GroupName.ToUpperInvariant());
+				}
 			});
-
-			app.UseMvc();
 		}
 	}
 }

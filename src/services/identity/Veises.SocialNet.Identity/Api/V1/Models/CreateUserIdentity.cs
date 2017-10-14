@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Veises.SocialNet.Identity.Models
+namespace Veises.SocialNet.Identity.Api.V1.Models
 {
 	/// <summary>
 	/// New user identity model
