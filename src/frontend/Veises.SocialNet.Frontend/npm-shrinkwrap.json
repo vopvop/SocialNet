@@ -1,6 +1,6 @@
 {
-  "name": "Veises_SocialNet_Frontend",
-  "version": "0.0.0",
+  "name": "veises_socialset_frontend",
+  "version": "0.0.1",
   "lockfileVersion": 1,
   "requires": true,
   "dependencies": {
