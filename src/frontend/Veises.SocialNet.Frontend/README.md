@@ -22,9 +22,9 @@ dotnet build
 ```
 dotnet run
 ```
-1. Profit!
+5. Profit!
 ### Build production
-1. Publish ASP.NET Core application:
+1. Publish ASP.NET Core application (to the `<project root>/publish directory`, for exapmle):
 ```
 dotnet publish -o /publish
 ```
