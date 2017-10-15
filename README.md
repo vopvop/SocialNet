@@ -25,14 +25,14 @@ The service will support multiple user roles for different purposes. Currently, 
 Our social network architecture will consider the next microservices list:
 1. User identity management;
 1. User account management;
-        1. User session management;
+    1. User session management;
 1. User roles management;
 1. Messages storage management + storage;
 1. Frontend service;
 1. Load balancer (not in scope of this project).
 ## Frameworks and Tools
 The requirements for dev tools and frameworks should be as low as possible (and cheap):
-* IDE: Visual Studio 2017 (free Community or Code edition);
+* IDE: Visual Studio 2017 (free Community or Code edition should be enough);
 * Main microservice framework: Microsoft ASP.NET Core 2.0;
 * Microservice REST API discoverer: Swagger 2.0;
 * Fronetnd framework: Angular 2, TypeScript;
