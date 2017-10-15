@@ -10,25 +10,25 @@ Based on Microsoft ASP.NET Core MVC.
 ```
 dotnet new angular
 ```
-1. Download NPM packages:
+2. Download NPM packages:
 ```
 npm install
 ```
-1. Build ASP.NET Core application:
+3. Build ASP.NET Core application:
 ```
 dotnet build
 ```
-1. Run:
+4. Run:
 ```
 dotnet run
 ```
-1. Profit!
+5. Profit!
 ### Build production
-1. Publish ASP.NET Core application:
+1. Publish ASP.NET Core application (to the `<project root>/publish directory`, for exapmle):
 ```
 dotnet publish -o /publish
 ```
-1. Profit!
+2. Profit!
 ### Add Docker support
 FFY
 # RTFM
