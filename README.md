@@ -36,5 +36,8 @@ The requirements for dev tools and frameworks should be as low as possible (and 
 * Main microservice framework: Microsoft ASP.NET Core 2.0;
 * Microservice REST API discoverer: Swagger 2.0;
 * Fronetnd framework: Angular 2, TypeScript;
-# Useful links
-* Google Site Reliability Engineering (<i>free ebook without registration and SMS</i>): https://landing.google.com/sre/
+# RTFM
+## Books
+* Microsoft's .NET Microservices. Architecture for Containerized .NET Applications (<i>free ebook without registration and SMS</i>): https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/
+## Links
+* Google's Site Reliability Engineering, SRE (available for online reading): https://landing.google.com/sre/
