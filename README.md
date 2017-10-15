@@ -23,15 +23,35 @@ The service will support multiple user roles for different purposes. Currently, 
     1. Remove another user messages from all user walls.
 ## Services
 Our social network architecture will consider the next microservices list:
-1. User dientity management;
+1. User identity management;
+1. User account management;
+    1. User session management;
 1. User roles management;
-1. User roles management;
-1. Messages storage;
-1. Frontend;
+1. Messages storage management + storage;
+1. Frontend service;
+1. Load balancer (not in scope of this project).
 ## Frameworks and Tools
-* IDE: Visual Studio 2017
-* ASP.NET Core 2.0;
-* Swagger;
-* Angular 2;
-# Useful links
-* Google Site Reliability Engineering (<i>free online book without registration and SMS</i>): https://landing.google.com/sre/
+The requirements for dev tools and frameworks should be as low as possible (and cheap):
+* IDE: Visual Studio 2017 (free Community or Code edition should be enough);
+* Main microservice framework: Microsoft ASP.NET Core 2.0 + Yeoman project generator;
+* Microservice REST API discoverer: Swagger 2.0;
+* Fronetnd framework: Angular 2, TypeScript;
+## Data transfer
+### API
+Microservices API will be based on the next main things:
+* REST (https://www.w3.org/2001/sw/wiki/REST) API construction principles. For some things RPC is prefered;
+* HTTP RFC (https://www.rfc-editor.org/retrieve/) specifications.
+### Protocol
+Default data transfet protocol types:
+* JSON;
+* XML.
+
+Then it can be reviewed and redesigned with Google Protobuf or some similar more efficient data exchange protocol type.
+# RTFM
+## Books
+* Microsoft's .NET Microservices. Architecture for Containerized .NET Applications (<i>free ebook without registration and SMS</i>): https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/
+## Links
+* RFC specifications database: https://www.rfc-editor.org/
+* Martin Fowler on microservices: https://www.martinfowler.com/articles/microservices.html
+* Google's Site Reliability Engineering, SRE (available for online reading): https://landing.google.com/sre/
+* Microsoft's Overview microservices: https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview-microservices
