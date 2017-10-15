@@ -23,15 +23,18 @@ The service will support multiple user roles for different purposes. Currently, 
     1. Remove another user messages from all user walls.
 ## Services
 Our social network architecture will consider the next microservices list:
-1. User dientity management;
+1. User identity management;
+1. User account management;
+        1. User session management;
 1. User roles management;
-1. User roles management;
-1. Messages storage;
-1. Frontend;
+1. Messages storage management + storage;
+1. Frontend service;
+1. Load balancer (not in scope of this project).
 ## Frameworks and Tools
-* IDE: Visual Studio 2017
-* ASP.NET Core 2.0;
-* Swagger;
-* Angular 2;
+The requirements for dev tools and frameworks should be as low as possible (and cheap):
+* IDE: Visual Studio 2017 (free Community or Code edition);
+* Main microservice framework: Microsoft ASP.NET Core 2.0;
+* Microservice REST API discoverer: Swagger 2.0;
+* Fronetnd framework: Angular 2, TypeScript;
 # Useful links
-* Google Site Reliability Engineering (<i>free online book without registration and SMS</i>): https://landing.google.com/sre/
+* Google Site Reliability Engineering (<i>free ebook without registration and SMS</i>): https://landing.google.com/sre/
