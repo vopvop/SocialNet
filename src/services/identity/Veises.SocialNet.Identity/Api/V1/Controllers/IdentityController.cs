@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,58 +9,41 @@ namespace Veises.SocialNet.Identity.Api.V1.Controllers
 	/// <summary>
 	/// User identity controller
 	/// </summary>
-	[Produces("application/json", "application/xml")]
 	[ApiVersion("1")]
 	[Route("api/v{version:apiVersion}/[controller]")]
+	[Produces("application/json", "application/xml")]
 	public sealed class IdentityController: Controller
 	{
 		/// <summary>
-		/// Get all user identities
-		/// </summary>
-		/// <returns></returns>
-		[HttpGet]
-		public IEnumerable<UserIdentity> Get()
-		{
-			return new[] { new UserIdentity { UserName = "value1" }, new UserIdentity { UserName = "value2" } };
-		}
-
-		/// <summary>
 		/// Get specified user identity
 		/// </summary>
-		/// <param name="id"></param>
-		/// <returns></returns>
+		/// <param name="id">Identity unique identificator</param>
+		/// <returns>Requested user identity</returns>
 		[HttpGet("{id}", Name = "Get")]
-		public string Get(int id)
+		public UserIdentity Get(string id)
 		{
-			return "value";
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
 		/// Update user identity
 		/// </summary>
-		/// <param name="value"></param>
+		/// <param name="createIdentityModel">Create user identity information</param>
 		[HttpPost]
-		public void Post([FromBody]CreateUserIdentity createIdentityModel)
+		public UserIdentity Post([FromBody]CreateUserIdentity createIdentityModel)
 		{
+			throw new NotImplementedException();
 		}
 
 		/// <summary>
 		/// Create user identity
 		/// </summary>
-		/// <param name="id"></param>
-		/// <param name="value"></param>
+		/// <param name="id">Identity unique identificator</param>
+		/// <param name="updateUserIdentity">User identity information</param>
 		[HttpPut("{id}")]
-		public void Put(int id, [FromBody]string value)
+		public UserIdentity Put(string id, [FromBody]UpdateUserIdentity updateUserIdentity)
 		{
-		}
-
-		/// <summary>
-		/// Delete user identity
-		/// </summary>
-		/// <param name="id"></param>
-		[HttpDelete("{id}")]
-		public void Delete(int id)
-		{
+			throw new NotImplementedException();
 		}
 	}
 }
