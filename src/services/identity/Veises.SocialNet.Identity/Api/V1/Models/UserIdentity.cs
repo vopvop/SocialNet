@@ -8,9 +8,21 @@ namespace Veises.SocialNet.Identity.Api.V1.Models
 	public sealed class UserIdentity
 	{
 		/// <summary>
+		/// Describes user identity is blocked
+		/// </summary>
+		[Required]
+		public bool IsBlocked { get; set; }
+
+		/// <summary>
 		/// User display name
 		/// </summary>
 		[Required]
 		public string UserName { get; set; }
+
+		/// <summary>
+		/// User unique identifier
+		/// </summary>
+		[Required]
+		public UserUid UserUid { get; set; }
 	}
 }

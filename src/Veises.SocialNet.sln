@@ -5,7 +5,13 @@ VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D5105CD4-194E-41EC-843C-39BB031D6C1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veises.SocialNet.Identity", "services\identity\Veises.SocialNet.Identity\Veises.SocialNet.Identity.csproj", "{BC0803B7-FD07-4F03-8860-777CC9F68187}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veises.SocialNet.Identity", "services\identity\Veises.SocialNet.Identity\Veises.SocialNet.Identity.csproj", "{BC0803B7-FD07-4F03-8860-777CC9F68187}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veises.SocialNet.Session", "services\session\Veises.SocialNet.Session\Veises.SocialNet.Session.csproj", "{32673646-7703-41C9-B8FA-BDF0F8E61A72}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{4050E3A6-2F05-4264-BF70-700014D578A7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Session", "Session", "{C54EA64D-37F8-4298-B740-B8C284F72209}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +23,19 @@ Global
 		{BC0803B7-FD07-4F03-8860-777CC9F68187}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC0803B7-FD07-4F03-8860-777CC9F68187}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC0803B7-FD07-4F03-8860-777CC9F68187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32673646-7703-41C9-B8FA-BDF0F8E61A72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32673646-7703-41C9-B8FA-BDF0F8E61A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32673646-7703-41C9-B8FA-BDF0F8E61A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32673646-7703-41C9-B8FA-BDF0F8E61A72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BC0803B7-FD07-4F03-8860-777CC9F68187} = {D5105CD4-194E-41EC-843C-39BB031D6C1F}
+		{BC0803B7-FD07-4F03-8860-777CC9F68187} = {4050E3A6-2F05-4264-BF70-700014D578A7}
+		{32673646-7703-41C9-B8FA-BDF0F8E61A72} = {C54EA64D-37F8-4298-B740-B8C284F72209}
+		{4050E3A6-2F05-4264-BF70-700014D578A7} = {D5105CD4-194E-41EC-843C-39BB031D6C1F}
+		{C54EA64D-37F8-4298-B740-B8C284F72209} = {D5105CD4-194E-41EC-843C-39BB031D6C1F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB1024D4-62FF-400E-B244-BB2EB1085D56}
