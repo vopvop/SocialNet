@@ -33,7 +33,7 @@ Our social network architecture will consider the next microservices list:
 ## Frameworks and Tools
 The requirements for dev tools and frameworks should be as low as possible (and cheap):
 * IDE: Visual Studio 2017 (free Community or Code edition should be enough);
-* Main microservice framework: Microsoft ASP.NET Core 2.0;
+* Main microservice framework: Microsoft ASP.NET Core 2.0 + Yeoman project generator;
 * Microservice REST API discoverer: Swagger 2.0;
 * Fronetnd framework: Angular 2, TypeScript;
 ## Data transfer
