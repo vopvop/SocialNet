@@ -40,12 +40,13 @@ The requirements for dev tools and frameworks should be as low as possible (and 
 ### API
 Microservices API will be based on the next main things:
 * REST (https://www.w3.org/2001/sw/wiki/REST) API construction principles. For some things RPC is prefered;
-* HTTP RFC specifications (https://www.rfc-editor.org/retrieve/).
+* HTTP RFC (https://www.rfc-editor.org/retrieve/) specifications.
 ### Protocol
 Default data transfet protocol types:
 * JSON;
 * XML.
-Then it can be reviewd and redesigned with Google Protobuf or some similar data exchange protocol type.
+
+Then it can be reviewed and redesigned with Google Protobuf or some similar more efficient data exchange protocol type.
 # RTFM
 ## Books
 * Microsoft's .NET Microservices. Architecture for Containerized .NET Applications (<i>free ebook without registration and SMS</i>): https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/
