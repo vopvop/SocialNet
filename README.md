@@ -36,8 +36,21 @@ The requirements for dev tools and frameworks should be as low as possible (and 
 * Main microservice framework: Microsoft ASP.NET Core 2.0;
 * Microservice REST API discoverer: Swagger 2.0;
 * Fronetnd framework: Angular 2, TypeScript;
+## Data transfer
+### API
+Microservices API will be based on the next main things:
+* REST (https://www.w3.org/2001/sw/wiki/REST) API construction principles. For some things RPC is prefered;
+* HTTP RFC specifications (https://www.rfc-editor.org/retrieve/).
+### Protocol
+Default data transfet protocol types:
+* JSON;
+* XML.
+Then it can be reviewd and redesigned with Google Protobuf or some similar data exchange protocol type.
 # RTFM
 ## Books
 * Microsoft's .NET Microservices. Architecture for Containerized .NET Applications (<i>free ebook without registration and SMS</i>): https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/
 ## Links
+* RFC specifications database: https://www.rfc-editor.org/
+* Martin Fowler on microservices: https://www.martinfowler.com/articles/microservices.html
 * Google's Site Reliability Engineering, SRE (available for online reading): https://landing.google.com/sre/
+* Microsoft's Overview microservices: https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-overview-microservices
