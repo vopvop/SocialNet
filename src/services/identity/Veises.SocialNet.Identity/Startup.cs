@@ -82,7 +82,8 @@ namespace Veises.SocialNet.Identity
 			ILoggerFactory loggerFactory,
 			IApiVersionDescriptionProvider provider)
 		{
-			loggerFactory.AddConsole();
+			loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+			loggerFactory.AddDebug();
 
 			if (env.IsDevelopment())
 			{
