@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{90
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veises.SocialNet.Frontend", "frontend\Veises.SocialNet.Frontend\Veises.SocialNet.Frontend.csproj", "{00AE27C9-E511-4F20-BBE0-793404F879C5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Veises.SocialNet.Identity.Contracts", "services\identity\Veises.SocialNet.Identity.Contracts\Veises.SocialNet.Identity.Contracts.csproj", "{6521EB07-C7F3-455D-8CD8-2DE736371726}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{00AE27C9-E511-4F20-BBE0-793404F879C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00AE27C9-E511-4F20-BBE0-793404F879C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00AE27C9-E511-4F20-BBE0-793404F879C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6521EB07-C7F3-455D-8CD8-2DE736371726}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6521EB07-C7F3-455D-8CD8-2DE736371726}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6521EB07-C7F3-455D-8CD8-2DE736371726}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6521EB07-C7F3-455D-8CD8-2DE736371726}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{4050E3A6-2F05-4264-BF70-700014D578A7} = {D5105CD4-194E-41EC-843C-39BB031D6C1F}
 		{C54EA64D-37F8-4298-B740-B8C284F72209} = {D5105CD4-194E-41EC-843C-39BB031D6C1F}
 		{00AE27C9-E511-4F20-BBE0-793404F879C5} = {90F9D452-C032-4099-B1AA-9396A791879C}
+		{6521EB07-C7F3-455D-8CD8-2DE736371726} = {4050E3A6-2F05-4264-BF70-700014D578A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB1024D4-62FF-400E-B244-BB2EB1085D56}
