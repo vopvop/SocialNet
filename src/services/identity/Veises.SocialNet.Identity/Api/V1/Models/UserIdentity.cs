@@ -17,6 +17,8 @@ namespace Veises.SocialNet.Identity.Api.V1.Models
 		/// User display name
 		/// </summary>
 		[Required]
+		[MinLength(ModelRestrictions.UserNameMinLength)]
+		[MaxLength(ModelRestrictions.UserNameMaxLength)]
 		public string UserName { get; set; }
 
 		/// <summary>
