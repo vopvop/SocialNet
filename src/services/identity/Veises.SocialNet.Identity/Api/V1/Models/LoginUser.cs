@@ -1,13 +1,19 @@
-﻿namespace Veises.SocialNet.Identity.Api.V1.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Veises.SocialNet.Identity.Api.V1.Models
 {
 	/// <summary>
 	/// Login user model
 	/// </summary>
 	public sealed class LoginUser
 	{
+
 		/// <summary>
 		/// User name
 		/// </summary>
+		[Required]
+		[MinLength(ModelRestrictions.UserNameMinLength)]
+		[MaxLength(ModelRestrictions.UserNameMaxLength)]
 		public string UserName { get; set; }
 
 		/// <summary>
