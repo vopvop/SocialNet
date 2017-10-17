@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Veises.SocialNet.Identity.Contracts
+namespace Veises.SocialNet.Identity.Contracts.Client
 {
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
@@ -153,7 +153,7 @@ namespace Veises.SocialNet.Identity.Contracts
         /// <param name='id'>
         /// Identity unique identificator
         /// </param>
-        /// <param name='version'>
+        /// <param name='apiVersion'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -176,15 +176,11 @@ namespace Veises.SocialNet.Identity.Contracts
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<UserIdentity>> ApiVversionIdentityByIdGetWithHttpMessagesAsync(string id, string version, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<UserIdentity>> ApiV1IdentityByIdGetWithHttpMessagesAsync(string id, string apiVersion = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (id == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "id");
-            }
-            if (version == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "version");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -194,15 +190,23 @@ namespace Veises.SocialNet.Identity.Contracts
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("id", id);
-                tracingParameters.Add("version", version);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "ApiVversionIdentityByIdGet", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "ApiV1IdentityByIdGet", tracingParameters);
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/v{version}/Identity/{id}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/v1/Identity/{id}").ToString();
             _url = _url.Replace("{id}", System.Uri.EscapeDataString(id));
-            _url = _url.Replace("{version}", System.Uri.EscapeDataString(version));
+            List<string> _queryParameters = new List<string>();
+            if (apiVersion != null)
+            {
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
+            }
+            if (_queryParameters.Count > 0)
+            {
+                _url += "?" + string.Join("&", _queryParameters);
+            }
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -299,10 +303,10 @@ namespace Veises.SocialNet.Identity.Contracts
         /// <param name='id'>
         /// Identity unique identificator
         /// </param>
-        /// <param name='version'>
-        /// </param>
         /// <param name='updateUserIdentity'>
         /// User identity information
+        /// </param>
+        /// <param name='apiVersion'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -325,7 +329,7 @@ namespace Veises.SocialNet.Identity.Contracts
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<UserIdentity>> ApiVversionIdentityByIdPutWithHttpMessagesAsync(string id, string version, UpdateUserIdentity updateUserIdentity = default(UpdateUserIdentity), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<UserIdentity>> ApiV1IdentityByIdPutWithHttpMessagesAsync(string id, UpdateUserIdentity updateUserIdentity = default(UpdateUserIdentity), string apiVersion = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (id == null)
             {
@@ -334,10 +338,6 @@ namespace Veises.SocialNet.Identity.Contracts
             if (updateUserIdentity != null)
             {
                 updateUserIdentity.Validate();
-            }
-            if (version == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "version");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -348,15 +348,23 @@ namespace Veises.SocialNet.Identity.Contracts
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("id", id);
                 tracingParameters.Add("updateUserIdentity", updateUserIdentity);
-                tracingParameters.Add("version", version);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "ApiVversionIdentityByIdPut", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "ApiV1IdentityByIdPut", tracingParameters);
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/v{version}/Identity/{id}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/v1/Identity/{id}").ToString();
             _url = _url.Replace("{id}", System.Uri.EscapeDataString(id));
-            _url = _url.Replace("{version}", System.Uri.EscapeDataString(version));
+            List<string> _queryParameters = new List<string>();
+            if (apiVersion != null)
+            {
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
+            }
+            if (_queryParameters.Count > 0)
+            {
+                _url += "?" + string.Join("&", _queryParameters);
+            }
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -456,10 +464,10 @@ namespace Veises.SocialNet.Identity.Contracts
         /// <remarks>
         /// Create new user identity
         /// </remarks>
-        /// <param name='version'>
-        /// </param>
         /// <param name='createIdentityModel'>
         /// Create user identity information
+        /// </param>
+        /// <param name='apiVersion'>
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -473,24 +481,14 @@ namespace Veises.SocialNet.Identity.Contracts
         /// <exception cref="SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        /// <exception cref="ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        /// <exception cref="System.ArgumentNullException">
-        /// Thrown when a required parameter is null
-        /// </exception>
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<UserIdentity>> ApiVversionIdentityPostWithHttpMessagesAsync(string version, CreateUserIdentity createIdentityModel = default(CreateUserIdentity), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<UserIdentity>> ApiV1IdentityPostWithHttpMessagesAsync(CreateUserIdentity createIdentityModel = default(CreateUserIdentity), string apiVersion = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (createIdentityModel != null)
             {
                 createIdentityModel.Validate();
-            }
-            if (version == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "version");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -500,14 +498,22 @@ namespace Veises.SocialNet.Identity.Contracts
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("createIdentityModel", createIdentityModel);
-                tracingParameters.Add("version", version);
+                tracingParameters.Add("apiVersion", apiVersion);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "ApiVversionIdentityPost", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "ApiV1IdentityPost", tracingParameters);
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/v{version}/Identity").ToString();
-            _url = _url.Replace("{version}", System.Uri.EscapeDataString(version));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "api/v1/Identity").ToString();
+            List<string> _queryParameters = new List<string>();
+            if (apiVersion != null)
+            {
+                _queryParameters.Add(string.Format("api-version={0}", System.Uri.EscapeDataString(apiVersion)));
+            }
+            if (_queryParameters.Count > 0)
+            {
+                _url += "?" + string.Join("&", _queryParameters);
+            }
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

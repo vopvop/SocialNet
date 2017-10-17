@@ -4,30 +4,30 @@
 // regenerated.
 // </auto-generated>
 
-namespace Veises.SocialNet.Identity.Contracts.Models
+namespace Veises.SocialNet.Identity.Contracts.Client.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;
     using System.Linq;
 
     /// <summary>
-    /// New user identity model
+    /// User identity
     /// </summary>
-    public partial class CreateUserIdentity
+    public partial class UpdateUserIdentity
     {
         /// <summary>
-        /// Initializes a new instance of the CreateUserIdentity class.
+        /// Initializes a new instance of the UpdateUserIdentity class.
         /// </summary>
-        public CreateUserIdentity()
+        public UpdateUserIdentity()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the CreateUserIdentity class.
+        /// Initializes a new instance of the UpdateUserIdentity class.
         /// </summary>
-        /// <param name="userName">User name</param>
-        public CreateUserIdentity(string userName)
+        /// <param name="userName">User display name</param>
+        public UpdateUserIdentity(string userName)
         {
             UserName = userName;
             CustomInit();
@@ -39,7 +39,7 @@ namespace Veises.SocialNet.Identity.Contracts.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets user name
+        /// Gets or sets user display name
         /// </summary>
         [JsonProperty(PropertyName = "userName")]
         public string UserName { get; set; }

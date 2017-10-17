@@ -4,7 +4,7 @@
 // regenerated.
 // </auto-generated>
 
-namespace Veises.SocialNet.Identity.Contracts.Models
+namespace Veises.SocialNet.Identity.Contracts.Client.Models
 {
     using Microsoft.Rest;
     using Newtonsoft.Json;
@@ -29,7 +29,7 @@ namespace Veises.SocialNet.Identity.Contracts.Models
         /// <param name="isBlocked">Describes user identity is blocked</param>
         /// <param name="userName">User display name</param>
         /// <param name="userUid">User unique identifier</param>
-        public UserIdentity(bool isBlocked, string userName, object userUid)
+        public UserIdentity(bool isBlocked, string userName, UserUid userUid)
         {
             IsBlocked = isBlocked;
             UserName = userName;
@@ -58,7 +58,7 @@ namespace Veises.SocialNet.Identity.Contracts.Models
         /// Gets or sets user unique identifier
         /// </summary>
         [JsonProperty(PropertyName = "userUid")]
-        public object UserUid { get; set; }
+        public UserUid UserUid { get; set; }
 
         /// <summary>
         /// Validate the object.
