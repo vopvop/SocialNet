@@ -1,8 +1,14 @@
+using System;
+using System.IO;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
+
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Veises_SocialNet_Frontend
 {
@@ -15,13 +21,39 @@ namespace Veises_SocialNet_Frontend
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc();
+
+			services.AddDistributedMemoryCache();
+
+			services.AddSession(options =>
+			{
+				options.Cookie.Name = ".Veises.SocialNet.Session";
+				options.IdleTimeout = TimeSpan.FromSeconds(10);
+				options.Cookie.HttpOnly = true;
+			});
+
+#if DEBUG
+
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc(
+					"v1",
+					new Info
+					{
+						Title = "Social Net API",
+						Version = "v1"
+					});
+
+				var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+				var xmlPath = Path.Combine(basePath, "Veises.SocialNet.Frontend.xml");
+				c.IncludeXmlComments(xmlPath);
+			});
+
+#endif
 		}
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			if (env.IsDevelopment())
@@ -31,6 +63,16 @@ namespace Veises_SocialNet_Frontend
 				{
 					HotModuleReplacement = true
 				});
+
+#if DEBUG
+
+				app.UseSwagger();
+				app.UseSwaggerUI(c =>
+				{
+					c.SwaggerEndpoint("/swagger/v1/swagger.json", "SocialNet API V1");
+				});
+
+#endif
 			}
 			else
 			{
@@ -38,6 +80,8 @@ namespace Veises_SocialNet_Frontend
 			}
 
 			app.UseStaticFiles();
+
+			app.UseSession();
 
 			app.UseMvc(routes =>
 			{
