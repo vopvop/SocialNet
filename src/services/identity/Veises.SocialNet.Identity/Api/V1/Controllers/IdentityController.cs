@@ -10,7 +10,7 @@ namespace Veises.SocialNet.Identity.Api.V1.Controllers
 	/// User identity controller
 	/// </summary>
 	[ApiVersion("1.0")]
-	[Route("api/v{version:apiVersion}/[controller]")]
+	[Route("api/v1/[controller]")]
 	[Produces("application/json", "application/xml")]
 	public sealed class IdentityController: Controller
 	{
