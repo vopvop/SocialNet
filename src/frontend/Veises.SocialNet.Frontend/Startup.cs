@@ -10,6 +10,9 @@ using Microsoft.Extensions.PlatformAbstractions;
 
 using Swashbuckle.AspNetCore.Swagger;
 
+using Veises.SocialNet.Frontend.Services;
+using Veises.SocialNet.Frontend.Services.Identity;
+
 namespace Veises_SocialNet_Frontend
 {
 	public class Startup
@@ -23,6 +26,9 @@ namespace Veises_SocialNet_Frontend
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddTransient<ISessionProvider, SessionProvider>();
+			services.AddSingleton<IIdentityServiceProvider, IdentityServiceProvider>();
+
 			services.AddMvc();
 
 			services.AddDistributedMemoryCache();

@@ -1,27 +1,82 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Rest;
+
+using Veises.SocialNet.Frontend.Models.Identity;
+using Veises.SocialNet.Frontend.Services;
+using Veises.SocialNet.Frontend.Services.Identity;
 
 namespace Veises.SocialNet.Frontend.Controllers
 {
+	/// <summary>
+	/// User identity controller
+	/// </summary>
+	/// <remarks>
+	/// Manage user identity and so
+	/// </remarks>
 	[Produces("application/json")]
 	[Route("api/Identity")]
 	public sealed class IdentityController: Controller
 	{
-		private const string userIdKey = "userUid";
+		private readonly ISessionProvider _sessionProvider;
+
+		private readonly IIdentityServiceProvider _identityServiceProvider;
+
+		/// <summary>
+		/// Identity controller constructor
+		/// </summary>
+		/// <param name="sessionProvider">User sessionn provider</param>
+		/// <param name="identityServiceProvider">User identity API client provider</param>
+		public IdentityController(
+			ISessionProvider sessionProvider,
+			IIdentityServiceProvider identityServiceProvider)
+		{
+			_sessionProvider = sessionProvider ?? throw new ArgumentNullException(nameof(sessionProvider));
+			_identityServiceProvider = identityServiceProvider ?? throw new ArgumentNullException(nameof(identityServiceProvider));
+		}
 
 		/// <summary>
 		/// Get current user identity
 		/// </summary>
-		/// <returns></returns>
 		[HttpGet]
 		[Route("Current")]
-		[ProducesResponseType(200)]
+		[ProducesResponseType(typeof(UserModel), 200)]
 		[ProducesResponseType(401)]
-		[ProducesResponseType(404)]
-		public IActionResult GetCurrent()
+		[ProducesResponseType(415)]
+		[ProducesResponseType(523)]
+		public async Task<IActionResult> GetCurrent()
 		{
-			// TODO: validate cookie and user
+			var session = _sessionProvider.GetSession();
 
-			return NotFound();
+			if (!session.TryGetUserId(out string userUid))
+			{
+				return Unauthorized();
+			}
+
+			using (var identityService = _identityServiceProvider.GetClient())
+			{
+				try
+				{
+					var userIdentity = await identityService.ApiV1IdentityByIdGetWithHttpMessagesAsync(userUid);
+
+					var userModel = new UserModel
+					{
+						DisplauName = userIdentity.Body.UserName
+					};
+
+					return Ok(userModel);
+				}
+				catch (HttpOperationException e)
+				{
+					return new StatusCodeResult(523);
+				}
+				catch (SerializationException e)
+				{
+					return new UnsupportedMediaTypeResult();
+				}
+			}
 		}
 	}
 }
