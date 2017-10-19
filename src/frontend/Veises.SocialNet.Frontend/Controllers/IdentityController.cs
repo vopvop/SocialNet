@@ -7,6 +7,7 @@ using Microsoft.Rest;
 using Veises.SocialNet.Frontend.Models.Identity;
 using Veises.SocialNet.Frontend.Services;
 using Veises.SocialNet.Frontend.Services.Identity;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Veises.SocialNet.Frontend.Controllers
 {
@@ -46,7 +47,7 @@ namespace Veises.SocialNet.Frontend.Controllers
 		[ProducesResponseType(401)]
 		[ProducesResponseType(415)]
 		[ProducesResponseType(523)]
-		public async Task<IActionResult> GetCurrent()
+		public IActionResult GetCurrent()
 		{
 			var session = _sessionProvider.GetSession();
 
@@ -59,7 +60,7 @@ namespace Veises.SocialNet.Frontend.Controllers
 			{
 				try
 				{
-					var userIdentity = await identityService.ApiV1IdentityByIdGetWithHttpMessagesAsync(userUid);
+					var userIdentity = identityService.ApiV1IdentityByIdGetWithHttpMessagesAsync(userUid).Result;
 
 					var userModel = new UserModel
 					{
