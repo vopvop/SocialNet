@@ -8,10 +8,10 @@
 		</ul>
 		<!--Central place somponents-->
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
-			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
+			<li [hidden]="!isAuthorized"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign up</a></li>
+			<li [hidden]="!isAuthorized"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Sign in</a></li>
 
-			<li class="dropdown">
+			<li class="dropdown" [hidden]="!isAuthorized">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 					<span class="glyphicon glyphicon-log-in"></span> Hi, $user name$
 					<span class="caret"></span>

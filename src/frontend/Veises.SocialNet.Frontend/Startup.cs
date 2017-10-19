@@ -3,6 +3,8 @@ using System.IO;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,9 @@ namespace Veises_SocialNet_Frontend
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+			services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
 			services.AddTransient<ISessionProvider, SessionProvider>();
 			services.AddSingleton<IIdentityServiceProvider, IdentityServiceProvider>();
 
