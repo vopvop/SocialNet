@@ -51,7 +51,7 @@ namespace Veises.SocialNet.Frontend.Controllers
 		{
 			var session = _sessionProvider.GetSession();
 
-			if (!session.TryGetUserId(out string userUid))
+			if (!session.TryGetUserId(out var userUid))
 			{
 				return Unauthorized();
 			}
