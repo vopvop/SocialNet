@@ -1,23 +1,20 @@
-﻿using System.IO;
-
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Veises.Common.Service;
+using Veises.Common.Service.Auth;
 
 namespace Veises.SocialNet.Identity
 {
 	public class Program
 	{
-		public static void Main(string[] args)
+		public static void Main()
 		{
-			BuildWebHost(args).Run();
-		}
-
-		public static IWebHost BuildWebHost(string[] args) =>
-			WebHost.CreateDefaultBuilder(args)
-				.UseKestrel()
-				.UseContentRoot(Directory.GetCurrentDirectory())
-				.UseIISIntegration()
-				.UseStartup<Startup>()
-				.Build();
+            using (var serviceHost = ServiceHost
+                .Create(typeof(Program).Assembly)
+                .WithDefaultConfigFile()
+                .WithJwtAuth()
+                .Build())
+            {
+                serviceHost.Run();
+            }
+        }
 	}
 }

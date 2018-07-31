@@ -13,7 +13,6 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 
 using Veises.SocialNet.Frontend.Services;
-using Veises.SocialNet.Frontend.Services.Identity;
 
 namespace Veises_SocialNet_Frontend
 {
@@ -32,7 +31,6 @@ namespace Veises_SocialNet_Frontend
 			services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
 			services.AddTransient<ISessionProvider, SessionProvider>();
-			services.AddSingleton<IIdentityServiceProvider, IdentityServiceProvider>();
 
 			services.AddMvc();
 
