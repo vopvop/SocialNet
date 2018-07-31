@@ -35,10 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\services\identity\Veises.SocialNet.Identity.Contracts\Veises.SocialNet.Identity.Contracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\navbar\navbar.component.ts" />
   </ItemGroup>
 
