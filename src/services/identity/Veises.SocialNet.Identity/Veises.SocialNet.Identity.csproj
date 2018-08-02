@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <StartupObject>Veises.SocialNet.Identity.Program</StartupObject>
@@ -13,33 +12,16 @@
     <RepositoryUrl>https://github.com/msharonov/Veises.SocialNet.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\Veises.SocialNet.Identity.xml</DocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup>
-    <Compile Remove="wwwroot\**" />
-    <Content Remove="wwwroot\**" />
-    <EmbeddedResource Remove="wwwroot\**" />
-    <None Remove="wwwroot\**" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.2" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
-  </ItemGroup>
-
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\..\common\Veises.Common.Service.Auth\Veises.Common.Service.Auth.csproj" />
     <ProjectReference Include="..\..\..\common\Veises.Common.Service\Veises.Common.Service.csproj" />
+    <ProjectReference Include="..\..\..\common\Veises.Common.Service.Auth\Veises.Common.Service.Auth.csproj" />
+    <ProjectReference Include="..\..\..\common\Veises.Common.Services.Swagger\Veises.Common.Services.Swagger.csproj" />      
+    <ProjectReference Include="..\..\..\common\Veises.Common.Service.Versionning\Veises.Common.Service.Versionning.csproj" />
   </ItemGroup>
-
 </Project>
