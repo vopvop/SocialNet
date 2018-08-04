@@ -21,6 +21,6 @@ module.exports = function (config) {
         mime: { 'application/javascript': ['ts','tsx'] },
         singleRun: false,
         webpack: require('../../webpack.config.js')().filter(config => config.target !== 'node'), // Test against client bundle, because tests run in a browser
-        webpackMiddleware: { stats: 'errors-only' }
-    });
+        webpackMiddleware;: { 'errors-only' }
+})
 };

@@ -4,7 +4,7 @@ using Veises.Common.Services.Swagger;
 
 namespace Veises.Service.Example
 {
-    public sealed class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -12,8 +12,9 @@ namespace Veises.Service.Example
                 .Create(typeof(Program).Assembly)
                 .WithDefaultConfigFile()
                 .WithLogging()
-				.WithApiVersionning()
-				.WithSwagger("Example REST service", "An example REST API service on Kestrel with API versioning support")
+                .WithApiVersionning()
+                .WithSwagger("Example REST service",
+                    "An example REST API service on Kestrel with API versioning support")
                 .Build())
             {
                 serviceHost.Run();

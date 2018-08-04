@@ -5,21 +5,21 @@ using Veises.Common.Services.Swagger;
 
 namespace Veises.SocialNet.Identity
 {
-	public sealed class Program
-	{
-		public static void Main()
-		{
+    public class Program
+    {
+        public static void Main()
+        {
             using (var serviceHost = ServiceHost
                 .Create(typeof(Program).Assembly)
                 .WithDefaultConfigFile()
-	            .WithLogging()
+                .WithLogging()
+                .WithApiVersionning()
+                .WithSwagger("SocialNet Identity", "Veises SocuanNet Identity Service")
                 .WithJwtAuth()
-	            .WithApiVersionning()
-				.WithSwagger("Veises Identity", "Veises Social Network identity service.")
                 .Build())
             {
                 serviceHost.Run();
             }
         }
-	}
+    }
 }
