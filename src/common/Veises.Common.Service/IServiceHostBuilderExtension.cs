@@ -4,7 +4,7 @@ namespace Veises.Common.Service
 {
     public static class IServiceHostBuilderExtension
     {
-        public static  IServiceHostBuilder WithConfigFile(
+        public static IServiceHostBuilder WithConfigFile(
             this IServiceHostBuilder serviceHostBuilder,
             string fileName,
             bool optional = true,
