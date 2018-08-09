@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Veises.Common.Service.IoC;
 using Veises.SocialNet.Message.Services;
 
-namespace Veises.SocialNet.Message.Adapters
+namespace Veises.SocialNet.Message.Adapters.Api
 {
     [InjectDependency(DependencyScope.Singleton)]
     internal sealed class MessageAdapter : IMessageAdapter
@@ -18,29 +18,29 @@ namespace Veises.SocialNet.Message.Adapters
             _messageDao = messageDao ?? throw new ArgumentNullException(nameof(messageDao));
         }
 
-        public void Delete(MessageIdDto id)
+        public void Delete(Guid id)
         {
-            throw new System.NotImplementedException();
+            _messageService.Delete(id);
         }
 
-        public MessageIdDto Post(string content)
+        public Guid Post(string content)
         {
-            throw new System.NotImplementedException();
+            return _messageService.Post(content);
         }
 
-        public void Update(MessageIdDto id, string content)
+        public void Update(Guid id, string content)
         {
-            throw new System.NotImplementedException();
+            _messageService.Update(id, content);
         }
 
-        public MessageDto Get(MessageIdDto messageId)
+        public MessageDto Get(Guid messageId)
         {
-            throw new System.NotImplementedException();
+            return _messageDao.Get(messageId);
         }
 
         public IEnumerable<MessageDto> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _messageDao.GetAll();
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using Veises.Common.Extensions;
-using Veises.Common.Service.Log;
-using Veises.SocialNet.Message.Adapters;
+using Veises.SocialNet.Message.Adapters.Api;
 
 namespace Veises.SocialNet.Message.Controllers
 {
@@ -13,16 +12,13 @@ namespace Veises.SocialNet.Message.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [Produces("application/json", "application/xml")]
-    public class MessageController : ControllerBase
+    public sealed class MessageController : ControllerBase
     {
         private readonly IMessageAdapter _messageAdapter;
 
-        private readonly ILogFor<MessageController> _log;
-
-        public MessageController(IMessageAdapter messageAdapter, ILogFor<MessageController> log)
+        public MessageController(IMessageAdapter messageAdapter)
         {
             _messageAdapter = messageAdapter ?? throw new ArgumentNullException(nameof(messageAdapter));
-            _log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
         /// <summary>
@@ -30,6 +26,7 @@ namespace Veises.SocialNet.Message.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(typeof(MessageDto[]), (int) HttpStatusCode.OK)]
         public IActionResult Get()
         {
             var messages = _messageAdapter.GetAll();
@@ -43,16 +40,11 @@ namespace Veises.SocialNet.Message.Controllers
         /// <param name="messageId">Message ID.</param>
         /// <returns>Single message with specified ID.</returns>
         [HttpGet("{messageId}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public IActionResult Get(string messageId)
+        [ProducesResponseType(typeof(MessageDto), (int) HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        public IActionResult Get(Guid messageId)
         {
-            if (messageId == null)
-                return BadRequest("MessageId is empty");
-            
-            _log.WriteInfo($"Executing request by ID {messageId.Escaped()}");
-            
-            var message = _messageAdapter.Get(new MessageIdDto(Guid.Parse(messageId)));
+            var message = _messageAdapter.Get(messageId);
 
             return Ok(message);
         }
@@ -63,7 +55,8 @@ namespace Veises.SocialNet.Message.Controllers
         /// <param name="content">New message content.</param>
         /// <returns>New message ID.</returns>
         [HttpPost]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(Guid), (int) HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         public IActionResult Post([FromBody] string content)
         {
             var message = _messageAdapter.Post(content);
@@ -78,13 +71,10 @@ namespace Veises.SocialNet.Message.Controllers
         /// <param name="content">A new message content.</param>
         /// <returns>Empty response.</returns>
         [HttpPut("{id}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
-        public IActionResult Put(MessageIdDto id, [FromBody] string content)
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        public IActionResult Put(Guid id, [FromBody] string content)
         {
-            if (id == null)
-                return BadRequest("Message Id is not defined.");
-            
             _messageAdapter.Update(id, content);
             
             return NoContent();
@@ -95,14 +85,13 @@ namespace Veises.SocialNet.Message.Controllers
         /// </summary>
         /// <param name="id">Existing message ID.</param>
         [HttpDelete("{id}")]
-        public IActionResult Delete(MessageIdDto id)
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
+        public IActionResult Delete(Guid id)
         {
-            if (id == null)
-                return BadRequest("Message Id is not defined.");
-            
             _messageAdapter.Delete(id);
             
-            return Ok();
+            return NoContent();
         }
     }
 }

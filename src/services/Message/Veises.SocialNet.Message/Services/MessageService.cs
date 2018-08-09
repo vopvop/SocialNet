@@ -1,18 +1,40 @@
-﻿using Veises.Common.Service.IoC;
+﻿using System;
+using Veises.Common.Service.IoC;
+using Veises.SocialNet.Message.Adapters.Database;
 
 namespace Veises.SocialNet.Message.Services
 {
     [InjectDependency(DependencyScope.Singleton)]
     internal sealed class MessageService : IMessageService
     {
-        public string Post(string content)
+        private readonly IRepository<Domaian.Message> _repository;
+
+        public MessageService(IRepository<Domaian.Message> repository)
         {
-            throw new System.NotImplementedException();
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public void Update(string id, string message)
+        public Guid Post(string content)
         {
-            throw new System.NotImplementedException();
+            var message = Domaian.Message.Create(content);
+
+            _repository.Add(message);
+
+            return message.Id;
+        }
+
+        public void Update(Guid id, string content)
+        {
+            var message = _repository.Get(id);
+
+            message.Update(content);
+
+            _repository.Update(message);
+        }
+
+        public void Delete(Guid id)
+        {
+            _repository.Delete(id);
         }
     }
 }
