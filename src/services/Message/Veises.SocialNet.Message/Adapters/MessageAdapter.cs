@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Veises.Common.Service.IoC;
 using Veises.SocialNet.Message.Services;
 
 namespace Veises.SocialNet.Message.Adapters
 {
+    [InjectDependency(DependencyScope.Singleton)]
     internal sealed class MessageAdapter : IMessageAdapter
     {
         private readonly IMessageService _messageService;

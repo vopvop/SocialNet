@@ -8,11 +8,13 @@ namespace Veises.SocialNet.Message
     {
         public static void Main()
         {
-            using (var serviceHost = ServiceHost.Create()
+            using (var serviceHost = ServiceHost
+                .Create(typeof(Program).Assembly)
                 .WithDefaultConfigFile()
                 .WithLogging()
                 .WithApiVersionning()
                 .WithSwagger("SocialNet Messages .", "Veises SocialNet message microservice.")
+                .WithAssemblyDependencies(typeof(Program).Assembly)
                 .Build())
             {
                 serviceHost.Run();
