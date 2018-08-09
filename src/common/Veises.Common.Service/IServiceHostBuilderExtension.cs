@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Reflection;
+using Veises.Common.Service.IoC;
+using Veises.Common.Service.Log;
 
 namespace Veises.Common.Service
 {
@@ -6,9 +9,7 @@ namespace Veises.Common.Service
     {
         public static IServiceHostBuilder WithConfigFile(
             this IServiceHostBuilder serviceHostBuilder,
-            string fileName,
-            bool optional = true,
-            bool reloadOnChange = true)
+            string fileName)
         {
             if (serviceHostBuilder == null)
                 throw new ArgumentNullException(nameof(serviceHostBuilder));
@@ -27,6 +28,11 @@ namespace Veises.Common.Service
         public static IServiceHostBuilder WithLogging(this IServiceHostBuilder serviceHostBuilder)
         {
             return serviceHostBuilder.Configure(new LoggingHostConfigurator());
+        }
+
+        public static IServiceHostBuilder WithAssemblyDependencies(this IServiceHostBuilder serviceHostBuilder, Assembly assembly)
+        {
+            return serviceHostBuilder.Configure(new IocHostConfigurator(assembly));
         }
     }
 }

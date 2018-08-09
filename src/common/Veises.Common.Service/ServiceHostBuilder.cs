@@ -21,6 +21,9 @@ namespace Veises.Common.Service
         public ServiceHostBuilder(IReadOnlyCollection<Assembly> assemblies)
         {
             _assemblies = assemblies ?? throw new ArgumentNullException(nameof(assemblies));
+            
+            if (_assemblies.Count == 0)
+                throw new ArgumentException("No one assembly was specified.");
 
             _hostConfigurators = new List<IHostConfigurator>();
         }
@@ -77,10 +80,10 @@ namespace Veises.Common.Service
                     }
                     else
                     {
-                        builder.UseHsts();
+                        // builder.UseHsts();
                     }
 
-                    builder.UseHttpsRedirection();
+                    // builder.UseHttpsRedirection();
 
                     foreach (var hostConfigurator in _hostConfigurators)
                     {

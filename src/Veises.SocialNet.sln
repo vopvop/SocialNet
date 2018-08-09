@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "message", "message", "{DC3A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veises.SocialNet.Message", "services\Message\Veises.SocialNet.Message\Veises.SocialNet.Message.csproj", "{90E7B664-FD1F-4451-83BA-0BB7E90BE454}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veises.Common", "common\Veises.Common\Veises.Common.csproj", "{C476981A-49A7-4649-A2B6-6DB62757B1EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{90E7B664-FD1F-4451-83BA-0BB7E90BE454}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90E7B664-FD1F-4451-83BA-0BB7E90BE454}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90E7B664-FD1F-4451-83BA-0BB7E90BE454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C476981A-49A7-4649-A2B6-6DB62757B1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C476981A-49A7-4649-A2B6-6DB62757B1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C476981A-49A7-4649-A2B6-6DB62757B1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C476981A-49A7-4649-A2B6-6DB62757B1EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{E606D63E-2C32-4AF4-87A3-88B57C116245} = {24AA06AA-D3F4-44C1-B9C9-3EA0F2ACEF45}
 		{DC3AD24F-25CC-45F5-AF20-AFC6309FFE98} = {D5105CD4-194E-41EC-843C-39BB031D6C1F}
 		{90E7B664-FD1F-4451-83BA-0BB7E90BE454} = {DC3AD24F-25CC-45F5-AF20-AFC6309FFE98}
+		{C476981A-49A7-4649-A2B6-6DB62757B1EF} = {24AA06AA-D3F4-44C1-B9C9-3EA0F2ACEF45}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB1024D4-62FF-400E-B244-BB2EB1085D56}

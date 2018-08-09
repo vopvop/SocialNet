@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Veises.Common.Extensions;
+using Veises.Common.Service.Log;
 using Veises.SocialNet.Message.Adapters;
 
 namespace Veises.SocialNet.Message.Controllers
@@ -9,15 +11,18 @@ namespace Veises.SocialNet.Message.Controllers
     /// </summary>
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [Produces("application/json", "application/xml")]
     public class MessageController : ControllerBase
     {
         private readonly IMessageAdapter _messageAdapter;
 
-        public MessageController(IMessageAdapter messageAdapter)
+        private readonly ILogFor<MessageController> _log;
+
+        public MessageController(IMessageAdapter messageAdapter, ILogFor<MessageController> log)
         {
             _messageAdapter = messageAdapter ?? throw new ArgumentNullException(nameof(messageAdapter));
+            _log = log ?? throw new ArgumentNullException(nameof(log));
         }
 
         /// <summary>
@@ -35,17 +40,19 @@ namespace Veises.SocialNet.Message.Controllers
         /// <summary>
         /// Get message by ID.
         /// </summary>
-        /// <param name="id">Message ID.</param>
+        /// <param name="messageId">Message ID.</param>
         /// <returns>Single message with specified ID.</returns>
-        [HttpGet("{id}")]
+        [HttpGet("{messageId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult Get(MessageIdDto messageId)
+        public IActionResult Get(string messageId)
         {
             if (messageId == null)
                 return BadRequest("MessageId is empty");
             
-            var message = _messageAdapter.Get(messageId);
+            _log.WriteInfo($"Executing request by ID {messageId.Escaped()}");
+            
+            var message = _messageAdapter.Get(new MessageIdDto(Guid.Parse(messageId)));
 
             return Ok(message);
         }
