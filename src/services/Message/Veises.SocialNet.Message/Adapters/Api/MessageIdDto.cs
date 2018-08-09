@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Veises.SocialNet.Message.Adapters
+namespace Veises.SocialNet.Message.Adapters.Api
 {
     public sealed class MessageIdDto
     {

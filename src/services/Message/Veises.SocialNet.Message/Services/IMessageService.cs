@@ -1,9 +1,13 @@
-﻿namespace Veises.SocialNet.Message.Services
+﻿using System;
+
+namespace Veises.SocialNet.Message.Services
 {
     internal interface IMessageService
     {
-        string Post(string content);
+        Guid Post(string content);
 
-        void Update(string id, string message);
+        void Update(Guid id, string message);
+
+        void Delete(Guid id);
     }
 }

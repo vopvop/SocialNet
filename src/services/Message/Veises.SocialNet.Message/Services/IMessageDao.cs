@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Veises.SocialNet.Message.Adapters.Api;
 
 namespace Veises.SocialNet.Message.Services
 {
     internal interface IMessageDao
     {
-        MessagePoco Get(string messageId);
+        MessageDto Get(Guid messageId);
 
-        IEnumerable<MessagePoco> GetAll();
+        IEnumerable<MessageDto> GetAll();
     }
 }

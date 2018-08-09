@@ -52,9 +52,6 @@ namespace Veises.Common.Service.IoC
             {
                 var typeAttribute = assemblyType.GetCustomAttribute<InjectDependencyAttribute>();
                 
-                if (typeAttribute == null || typeAttribute.Scope == DependencyScope.Unknown)
-                    continue;
-            
                 yield return new Tuple<Type, Type, DependencyScope>(assemblyType, assemblyType, typeAttribute.Scope);
                 
                 var implementedInterfaces = assemblyType.GetInterfaces();
