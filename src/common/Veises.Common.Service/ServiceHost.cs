@@ -16,7 +16,8 @@ namespace Veises.Common.Service
             _webHost = webHost ?? throw new ArgumentNullException(nameof(webHost));
         }
 
-        public static IServiceHostBuilder Create(params Assembly[] assemblies) => new ServiceHostBuilder(assemblies);
+        public static IServiceHostBuilder Create(Assembly[] assemblies, params string[] args) =>
+            new ServiceHostBuilder(assemblies, args);
 
         public Task Start(CancellationToken cancellationToken) => _webHost.StartAsync(cancellationToken);
 

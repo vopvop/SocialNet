@@ -18,7 +18,10 @@ namespace Veises.Common.Service.IoC
             _sourceAssembly = sourceAssembly ?? throw new ArgumentNullException(nameof(sourceAssembly));
         }
 
-        public Action<WebHostBuilderContext, IConfigurationBuilder> ConfigureApp() => (context, builder) => { };
+        public Action<WebHostBuilderContext, IConfigurationBuilder> ConfigureApp()
+        {
+            return (context, builder) => { };
+        }
 
         public Action<IServiceCollection> ConfigureServices()
         {
@@ -27,26 +30,29 @@ namespace Veises.Common.Service.IoC
                 var injections = GetDependencyInjections();
 
                 foreach (var injection in injections)
-                {
-                    switch (injection.Item3)
+                    switch (injection.Scope)
                     {
                         case DependencyScope.Scoped:
-                            services.AddScoped(injection.Item2, injection.Item1);
+                            services.AddScoped(injection.Service, injection.Implementation);
                             break;
                         case DependencyScope.Singleton:
-                            services.AddSingleton(injection.Item2, injection.Item1);
+                            services.AddSingleton(injection.Service, injection.Implementation);
                             break;
                         case DependencyScope.Transient:
-                            services.AddTransient(injection.Item2, injection.Item1);
+                            services.AddTransient(injection.Service, injection.Implementation);
                             break;
                         default:
-                            throw new ArgumentException($"Unknown injection scope type {injection.Item3.Escaped()}.");
+                            throw new ArgumentException($"Unknown injection scope type {injection.Scope.Escaped()}.");
                     }
-                }
             };
         }
 
-        private IEnumerable<Tuple<Type, Type, DependencyScope>> GetDependencyInjections()
+        public Action<IApplicationBuilder> Configure()
+        {
+            return builder => { };
+        }
+
+        private IEnumerable<(Type Service, Type Implementation, DependencyScope Scope)> GetDependencyInjections()
         {
             foreach (var assemblyType in _sourceAssembly.GetTypes())
             {
@@ -55,8 +61,7 @@ namespace Veises.Common.Service.IoC
                 if (injectedDependencyAttribute == null)
                     continue;
 
-                yield return new Tuple<Type, Type, DependencyScope>(assemblyType, assemblyType,
-                    injectedDependencyAttribute.Scope);
+                yield return (assemblyType, assemblyType, injectedDependencyAttribute.Scope);
 
                 var implementedInterfaces = assemblyType.GetInterfaces();
 
@@ -64,27 +69,23 @@ namespace Veises.Common.Service.IoC
                     continue;
 
                 foreach (var implementedInterface in implementedInterfaces)
-                {
                     if (implementedInterface.IsGenericType)
                     {
                         var genericInterfactType = implementedInterface.GetGenericTypeDefinition();
 
-                        yield return new Tuple<Type, Type, DependencyScope>(
-                            assemblyType,
+                        yield return (
                             genericInterfactType,
+                            assemblyType,
                             injectedDependencyAttribute.Scope);
                     }
                     else
                     {
-                        yield return new Tuple<Type, Type, DependencyScope>(
-                            assemblyType,
+                        yield return (
                             implementedInterface,
+                            assemblyType,
                             injectedDependencyAttribute.Scope);
                     }
-                }
             }
         }
-
-        public Action<IApplicationBuilder> Configure() => builder => { };
     }
 }

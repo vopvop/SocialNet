@@ -22,18 +22,9 @@ namespace Veises.Common.Service.Settings
 
             if (settingAttribute == null)
                 throw new InvalidOperationException(
-                    $"Setting attribute is not defined for class {typeof(T).Escaped()}.");
+                    $"Class of type {typeof(T).Escaped()} is not marked with {typeof(SettingAttribute).Escaped()} attribute.");
 
-            var configSection = _configuration.GetSection(settingAttribute.SectionName);
-
-            if (configSection == null)
-                return new T();
-
-            var settingInstance = new T();
-
-            configSection.Bind(settingInstance);
-
-            return settingInstance;
+            return _configuration.GetSection(settingAttribute.SectionName).Get<T>();
         }
     }
 }
