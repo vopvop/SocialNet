@@ -25,7 +25,7 @@ namespace Veises.Common.Service.IoC
             return services =>
             {
                 var injections = GetDependencyInjections();
-                
+
                 foreach (var injection in injections)
                 {
                     switch (injection.Item3)
@@ -50,15 +50,37 @@ namespace Veises.Common.Service.IoC
         {
             foreach (var assemblyType in _sourceAssembly.GetTypes())
             {
-                var typeAttribute = assemblyType.GetCustomAttribute<InjectDependencyAttribute>();
-                
-                yield return new Tuple<Type, Type, DependencyScope>(assemblyType, assemblyType, typeAttribute.Scope);
-                
+                var injectedDependencyAttribute = assemblyType.GetCustomAttribute<InjectDependencyAttribute>();
+
+                if (injectedDependencyAttribute == null)
+                    continue;
+
+                yield return new Tuple<Type, Type, DependencyScope>(assemblyType, assemblyType,
+                    injectedDependencyAttribute.Scope);
+
                 var implementedInterfaces = assemblyType.GetInterfaces();
+
+                if (implementedInterfaces.Length == 0)
+                    continue;
 
                 foreach (var implementedInterface in implementedInterfaces)
                 {
-                    yield return new Tuple<Type, Type, DependencyScope>(assemblyType, implementedInterface, typeAttribute.Scope);
+                    if (implementedInterface.IsGenericType)
+                    {
+                        var genericInterfactType = implementedInterface.GetGenericTypeDefinition();
+
+                        yield return new Tuple<Type, Type, DependencyScope>(
+                            assemblyType,
+                            genericInterfactType,
+                            injectedDependencyAttribute.Scope);
+                    }
+                    else
+                    {
+                        yield return new Tuple<Type, Type, DependencyScope>(
+                            assemblyType,
+                            implementedInterface,
+                            injectedDependencyAttribute.Scope);
+                    }
                 }
             }
         }
