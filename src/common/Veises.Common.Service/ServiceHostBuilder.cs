@@ -16,11 +16,14 @@ namespace Veises.Common.Service
     {
         private readonly IReadOnlyCollection<Assembly> _assemblies;
 
+        private readonly string[] _args;
+
         private readonly ICollection<IHostConfigurator> _hostConfigurators;
 
-        public ServiceHostBuilder(IReadOnlyCollection<Assembly> assemblies)
+        public ServiceHostBuilder(IReadOnlyCollection<Assembly> assemblies, params string[] args)
         {
             _assemblies = assemblies ?? throw new ArgumentNullException(nameof(assemblies));
+            _args = args;
             
             if (_assemblies.Count == 0)
                 throw new ArgumentException("No one assembly was specified.");
@@ -39,6 +42,7 @@ namespace Veises.Common.Service
                         var env = context.HostingEnvironment;
 
                         config
+                            .AddCommandLine(_args)
                             .SetBasePath(env.ContentRootPath)
                             .AddEnvironmentVariables();
 
@@ -52,6 +56,7 @@ namespace Veises.Common.Service
                     services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                     services.AddSingleton<IHttpContextProvider, HttpContextProvider>();
 
+                    services.AddSingleton<ISystemEnvironment>(provider => new SystemEnvironment(_args));
                     services.AddSingleton<ITimeService, TimeService>();
 
                     var mvcBuilder = services
