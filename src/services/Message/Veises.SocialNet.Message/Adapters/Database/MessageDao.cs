@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Veises.Common.Service.IoC;
 using Veises.SocialNet.Message.Adapters.Api;
-using Veises.SocialNet.Message.Adapters.Database;
 
-namespace Veises.SocialNet.Message.Services
+namespace Veises.SocialNet.Message.Adapters.Database
 {
     [InjectDependency(DependencyScope.Singleton)]
     internal sealed class MessageDao : IMessageDao
@@ -24,17 +23,23 @@ namespace Veises.SocialNet.Message.Services
             return new MessageDto
             {
                 Content = message.Content,
-                Id = messageId
+                CreatedUtc = message.CreatedUtc,
+                Id = messageId,
+                ModifiedUtc = message.ModifiedUtc
             };
         }
 
         public IEnumerable<MessageDto> GetAll()
         {
-            return _repository.All().Select(m => new MessageDto
-            {
-                Content = m.Content,
-                Id = m.Id
-            });
+            return _repository
+                .All()
+                .Select(m => new MessageDto
+                {
+                    Content = m.Content,
+                    CreatedUtc = m.CreatedUtc,
+                    Id = m.Id,
+                    ModifiedUtc = m.ModifiedUtc
+                });
         }
     }
 }

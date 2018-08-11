@@ -1,5 +1,6 @@
 ﻿using System;
 using Veises.Common.Service.IoC;
+using Veises.Common.Service.Utils;
 using Veises.SocialNet.Message.Adapters.Database;
 
 namespace Veises.SocialNet.Message.Services
@@ -9,14 +10,17 @@ namespace Veises.SocialNet.Message.Services
     {
         private readonly IRepository<Domaian.Message> _repository;
 
-        public MessageService(IRepository<Domaian.Message> repository)
+        private readonly ITimeService _timeService;
+
+        public MessageService(IRepository<Domaian.Message> repository, ITimeService timeService)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _timeService = timeService ?? throw new ArgumentNullException(nameof(timeService));
         }
 
         public Guid Post(string content)
         {
-            var message = Domaian.Message.Create(content);
+            var message = Domaian.Message.Create(content, _timeService.GetCurrentUtc());
 
             _repository.Add(message);
 
@@ -27,7 +31,7 @@ namespace Veises.SocialNet.Message.Services
         {
             var message = _repository.Get(id);
 
-            message.Update(content);
+            message.Update(content, _timeService.GetCurrentUtc());
 
             _repository.Update(message);
         }
