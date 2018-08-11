@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Veises.Common.Service.IoC;
+using Veises.SocialNet.Message.Adapters.Database;
 using Veises.SocialNet.Message.Services;
 
 namespace Veises.SocialNet.Message.Adapters.Api

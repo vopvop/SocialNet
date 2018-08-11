@@ -52,6 +52,8 @@ namespace Veises.Common.Service
                     services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
                     services.AddSingleton<IHttpContextProvider, HttpContextProvider>();
 
+                    services.AddSingleton<ITimeService, TimeService>();
+
                     var mvcBuilder = services
                         .AddMvcCore(options => options.RespectBrowserAcceptHeader = true)
                         .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
