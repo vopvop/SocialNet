@@ -12,11 +12,11 @@ namespace Veises.SocialNet.Message.Controllers
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [Produces("application/json", "application/xml")]
-    public sealed class MessageController : ControllerBase
+    public sealed class MessagesController : ControllerBase
     {
         private readonly IMessageAdapter _messageAdapter;
 
-        public MessageController(IMessageAdapter messageAdapter)
+        public MessagesController(IMessageAdapter messageAdapter)
         {
             _messageAdapter = messageAdapter ?? throw new ArgumentNullException(nameof(messageAdapter));
         }
