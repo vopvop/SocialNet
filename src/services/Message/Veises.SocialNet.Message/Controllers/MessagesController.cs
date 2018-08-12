@@ -30,7 +30,7 @@ namespace Veises.SocialNet.Message.Controllers
         public IActionResult Get()
         {
             var messages = _messageAdapter.GetAll();
-            
+
             return Ok(messages);
         }
 
@@ -60,7 +60,7 @@ namespace Veises.SocialNet.Message.Controllers
         public IActionResult Post([FromBody] string content)
         {
             var message = _messageAdapter.Post(content);
-            
+
             return Ok(message);
         }
 
@@ -76,7 +76,7 @@ namespace Veises.SocialNet.Message.Controllers
         public IActionResult Put(Guid id, [FromBody] string content)
         {
             _messageAdapter.Update(id, content);
-            
+
             return NoContent();
         }
 
@@ -90,7 +90,7 @@ namespace Veises.SocialNet.Message.Controllers
         public IActionResult Delete(Guid id)
         {
             _messageAdapter.Delete(id);
-            
+
             return NoContent();
         }
     }

@@ -11,7 +11,7 @@ namespace Veises.SocialNet.Message.Services
         }
 
         public string Id { get; }
-        
+
         public string Content { get; }
     }
 }

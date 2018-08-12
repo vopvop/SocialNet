@@ -1,19 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
+    <Import Project="..\..\..\netcore.2.1.exe.props.xml"/>
+
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.1</TargetFramework>
         <StartupObject>Veises.SocialNet.Identity.Program</StartupObject>
-        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-        <Authors>Maksim Sharonov</Authors>
-        <Company>Veises</Company>
-        <Product>SocialNet</Product>
-        <PackageLicenseUrl>https://raw.githubusercontent.com/msharonov/Veises.SocialNet/master/LICENSE</PackageLicenseUrl>
-        <PackageProjectUrl>https://github.com/msharonov/Veises.SocialNet</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/msharonov/Veises.SocialNet.git</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
-    
+
     <ItemGroup>
         <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0"/>
     </ItemGroup>

@@ -1,14 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-    </PropertyGroup>
+    <Import Project="..\..\..\netstandard.props.xml"/>
 
     <ItemGroup>
         <Folder Include="contracts\"/>
-    </ItemGroup>
-
-    <ItemGroup>
     </ItemGroup>
 
     <ItemGroup>
