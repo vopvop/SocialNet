@@ -1,8 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-    </PropertyGroup>
+
+    <Import Project="..\..\netstandard.props.xml"/>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.12"/>
