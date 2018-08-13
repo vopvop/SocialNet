@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="..\..\netstandard.props.xml"/>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.12"/>
+        <PackageReference Include="Newtonsoft.Json" Version="11.0.2"/>
+    </ItemGroup>
+
+</Project>

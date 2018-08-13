@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const AotPlugin = require('@ngtools/webpack').AotPlugin;
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
-module.exports = (env) => {
+module.exports = (env) =;> {
 	// Configuration in common to both client-side and server-side bundles
 	const isDevBuild = !(env && env.prod);
 	const sharedConfig = {
@@ -81,4 +81,4 @@ module.exports = (env) => {
 	});
 
 	return [clientBundleConfig, serverBundleConfig];
-};
+}

@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="..\..\netstandard.props.xml"/>
+    
+    <PropertyGroup>
+        <OutputType>library</OutputType>
+    </PropertyGroup>
+
+</Project>

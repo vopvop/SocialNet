@@ -1,0 +1,9 @@
+﻿<Project>
+
+    <Import Project="netcore.2.1.props.xml"/>
+
+    <PropertyGroup>
+        <OutputType>exe</OutputType>
+    </PropertyGroup>
+
+</Project>

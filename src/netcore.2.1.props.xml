@@ -1,0 +1,16 @@
+﻿<Project>
+
+    <Import Project="common.props.xml" />
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+        <RuntimeFrameworkVersion>2.1.2</RuntimeFrameworkVersion>
+        <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2"/>
+    </ItemGroup>
+
+</Project>
