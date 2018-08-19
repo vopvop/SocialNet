@@ -1,15 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <Import Project="..\..\netcore.2.1.props.xml"/>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.1.1"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="2.1.1"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Veises.Common\Veises.Common.csproj"/>
-    </ItemGroup>
-
+  <Import Project="..\..\netcore.2.1.props.xml" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="2.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Veises.Common\Veises.Common.csproj" />
+  </ItemGroup>
 </Project>

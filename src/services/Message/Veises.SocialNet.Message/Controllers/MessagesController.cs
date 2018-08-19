@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Veises.SocialNet.Message.Adapters.Api;
@@ -29,7 +30,7 @@ namespace Veises.SocialNet.Message.Controllers
         [ProducesResponseType(typeof(MessageDto[]), (int) HttpStatusCode.OK)]
         public IActionResult Get()
         {
-            var messages = _messageAdapter.GetAll();
+            var messages = _messageAdapter.GetAll().ToList();
 
             return Ok(messages);
         }
