@@ -77,8 +77,6 @@ namespace Veises.Common.Service
                 })
                 .Configure(builder =>
                 {
-                    builder.UseMvc();
-
                     var env = builder.ApplicationServices.GetRequiredService<IHostingEnvironment>();
 
                     if (env.IsDevelopment())
@@ -96,6 +94,8 @@ namespace Veises.Common.Service
                     {
                         hostConfigurator.Configure()(builder);
                     }
+                    
+                    builder.UseMvc();
                 })
                 .Build();
 

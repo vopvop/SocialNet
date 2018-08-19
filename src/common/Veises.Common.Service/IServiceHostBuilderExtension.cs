@@ -2,6 +2,7 @@
 using System.Reflection;
 using Veises.Common.Service.IoC;
 using Veises.Common.Service.Log;
+using Veises.Common.Service.Middleware;
 using Veises.Common.Service.Settings;
 
 namespace Veises.Common.Service
@@ -35,6 +36,14 @@ namespace Veises.Common.Service
             if (serviceHostBuilder == null) throw new ArgumentNullException(nameof(serviceHostBuilder));
 
             return serviceHostBuilder.Configure(new IocHostConfigurator(assembly));
+        }
+
+        public static IServiceHostBuilder WithRequestMiddleware<TRequestExecutor>(this IServiceHostBuilder serviceHostBuilder)
+            where TRequestExecutor : class, IRequestMiddleware
+        {
+            if (serviceHostBuilder == null) throw new ArgumentNullException(nameof(serviceHostBuilder));
+
+            return serviceHostBuilder.Configure(new RequestMiddlewareConfigurator<TRequestExecutor>());
         }
     }
 }
