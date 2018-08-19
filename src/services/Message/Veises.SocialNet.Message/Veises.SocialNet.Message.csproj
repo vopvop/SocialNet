@@ -9,7 +9,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\common\Veises.Common.Service.Auth\Veises.Common.Service.Auth.csproj"/>
         <ProjectReference Include="..\..\..\common\Veises.Common.Service.Versionning\Veises.Common.Service.Versionning.csproj"/>
-        <ProjectReference Include="..\..\..\common\Veises.Common.Services.Swagger\Veises.Common.Services.Swagger.csproj"/>
+        <ProjectReference Include="..\..\..\common\Veises.Common.Service.Swagger\Veises.Common.Service.Swagger.csproj"/>
         <ProjectReference Include="..\..\..\common\Veises.Common.Service\Veises.Common.Service.csproj"/>
     </ItemGroup>
 

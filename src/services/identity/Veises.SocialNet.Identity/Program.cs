@@ -2,7 +2,7 @@
 using Veises.Common.Service;
 using Veises.Common.Service.Auth;
 using Veises.Common.Service.Versionning;
-using Veises.Common.Services.Swagger;
+using Veises.Common.Service.Swagger;
 
 namespace Veises.SocialNet.Identity
 {
