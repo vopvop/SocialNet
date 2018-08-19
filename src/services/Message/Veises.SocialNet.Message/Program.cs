@@ -18,6 +18,7 @@ namespace Veises.SocialNet.Message
                 .WithSwagger("SocialNet Messages .", "Veises SocialNet message microservice.")
                 .WithAssemblyDependencies(typeof(Program).Assembly)
                 .WithRequestMiddleware<CurrentServerTimeRequestMiddleware>()
+                .WithHttps(useForDev: true)
                 .Build())
             {
                 serviceHost.Run();

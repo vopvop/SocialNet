@@ -83,12 +83,6 @@ namespace Veises.Common.Service
                     {
                         builder.UseDeveloperExceptionPage();
                     }
-                    else
-                    {
-                        // builder.UseHsts();
-                    }
-
-                    // builder.UseHttpsRedirection();
 
                     foreach (var hostConfigurator in _hostConfigurators)
                     {
