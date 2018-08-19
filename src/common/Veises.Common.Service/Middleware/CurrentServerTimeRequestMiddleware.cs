@@ -7,7 +7,7 @@ namespace Veises.Common.Service.Middleware
 {
     public sealed class CurrentServerTimeRequestMiddleware : IRequestMiddleware
     {
-        private const string ServerTime = "server-time-utc";
+        private const string ServerTime = "sn-time-utc";
 
         private readonly ITimeService _timeService;
 

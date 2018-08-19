@@ -19,6 +19,7 @@ namespace Veises.SocialNet.Message
                 .WithAssemblyDependencies(typeof(Program).Assembly)
                 .WithRequestMiddleware<CurrentServerTimeRequestMiddleware>()
                 .WithHttps(useForDev: true)
+                .WithSessionId()
                 .Build())
             {
                 serviceHost.Run();
