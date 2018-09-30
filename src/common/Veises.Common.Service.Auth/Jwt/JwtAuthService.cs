@@ -22,21 +22,20 @@ namespace Veises.Common.Service.Auth.Jwt
             _jwtTokenProvider = jwtTokenProvider ?? throw new ArgumentNullException(nameof(jwtTokenProvider));
         }
 
-        public void Authorize(UserAuthData userAuthData)
+        public AuthSession Authorize(UserAuthData userAuthData)
         {
             if (userAuthData == null)
                 throw new ArgumentNullException(nameof(userAuthData));
 
-            var jwtToken = _jwtTokenProvider.GetToken(
-                new UserInfo(
-                    userAuthData.SystemId,
-                    userAuthData.Uid));
+            var jwtToken = _jwtTokenProvider.GetToken(userAuthData);
 
             _httpContextProvider
                 .Get()
                 .Response
                 .Headers
-                .Add(JwtTokenHeaderName, jwtToken);
+                .Add(JwtTokenHeaderName, jwtToken.TokenValue);
+            
+            return new AuthSession(jwtToken.TokenId);
         }
 
         public UserInfo GetUserInfo()

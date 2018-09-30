@@ -7,6 +7,6 @@ namespace Veises.Common.Service.Auth
         [NotNull]
         UserInfo GetUserInfo();
 
-        void Authorize([NotNull] UserAuthData userAuthData);
+        AuthSession Authorize([NotNull] UserAuthData userAuthData);
     }
 }

@@ -30,7 +30,7 @@ namespace Veises.SocialNet.Identity.Api.V1.Controllers
         /// </summary>
         /// <returns>User info.</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(UserInfo), (int) HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(UserIdentity), (int) HttpStatusCode.OK)]
         [ProducesResponseType((int) HttpStatusCode.Forbidden)]
         [UsedImplicitly]
         public IActionResult Get()
@@ -54,6 +54,7 @@ namespace Veises.SocialNet.Identity.Api.V1.Controllers
         [AllowAnonymous]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.Forbidden)]
+        [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [UsedImplicitly]
         public IActionResult Post([NotNull][FromBody] LoginUser loginUser)
         {

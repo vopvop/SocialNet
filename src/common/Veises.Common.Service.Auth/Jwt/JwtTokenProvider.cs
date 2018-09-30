@@ -15,10 +15,10 @@ namespace Veises.Common.Service.Auth.Jwt
             _jwtAuthConfigProvider = jwtAuthConfigProvider ?? throw new ArgumentNullException(nameof(jwtAuthConfigProvider));
         }
 
-        public string GetToken(UserInfo userInfo)
+        public JwtToken GetToken(UserAuthData userAuthData)
         {
-            if (userInfo == null)
-                throw new ArgumentNullException(nameof(userInfo));
+            if (userAuthData == null)
+                throw new ArgumentNullException(nameof(userAuthData));
 
             var jwtConfig = _jwtAuthConfigProvider.GetConfig();
 
@@ -26,7 +26,7 @@ namespace Veises.Common.Service.Auth.Jwt
 
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var claimsModel = JwtClaimsModel.Create(userInfo);
+            var claimsModel = JwtClaimsModel.Create(userAuthData);
 
             var token = new JwtSecurityToken(
                 jwtConfig.Issuer,
@@ -35,7 +35,9 @@ namespace Veises.Common.Service.Auth.Jwt
                 expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: credentials);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
+            
+            return new JwtToken(claimsModel.GetTokenId(), tokenValue);
         }
     }
 }

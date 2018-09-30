@@ -6,19 +6,24 @@ using Veises.SocialNet.Identity.Api.V1.Models;
 
 namespace Veises.SocialNet.Identity.Services
 {
+    [UsedImplicitly]
     [InjectDependency(DependencyScope.Singleton)]
     internal sealed class IdentityService : IIdentityService
     {
-        [NotNull]
-        private readonly IAuthService _authService;
+        [NotNull] private readonly IAuthService _authService;
 
-        [NotNull]
-        private readonly UserCredentialStorage _userCredentialStorage;
+        [NotNull] private readonly UserCredentialStorage _userCredentialStorage;
 
-        public IdentityService([NotNull] IAuthService authService, [NotNull] UserCredentialStorage userCredentialStorage)
+        [NotNull] private readonly UserSessionStorage _userSessionStorage;
+
+        public IdentityService(
+            [NotNull] IAuthService authService,
+            [NotNull] UserCredentialStorage userCredentialStorage,
+            [NotNull] UserSessionStorage userSessionStorage)
         {
             _authService = authService ?? throw new ArgumentNullException(nameof(authService));
             _userCredentialStorage = userCredentialStorage ?? throw new ArgumentNullException(nameof(userCredentialStorage));
+            _userSessionStorage = userSessionStorage ?? throw new ArgumentNullException(nameof(userSessionStorage));
         }
 
         public bool TryGetCurrent(out UserIdentity userIdentity)
@@ -26,6 +31,8 @@ namespace Veises.SocialNet.Identity.Services
             var currentUserInfo = _authService.GetUserInfo();
 
             var userCredential = _userCredentialStorage.Get(currentUserInfo.Login);
+            
+            _userSessionStorage.Validate(currentUserInfo.Uid, currentUserInfo.SessionId);
 
             userIdentity = new UserIdentity
             {
@@ -46,10 +53,12 @@ namespace Veises.SocialNet.Identity.Services
             if (!userCredential.IsPasswordValid(passwordHash))
                 return false;
 
-            _authService.Authorize(
+            var authSession = _authService.Authorize(
                 new UserAuthData(
                     userCredential.GetId(),
                     userCredential.GetUserLogin()));
+            
+            _userSessionStorage.AddOrUpdate(userCredential.GetId(), authSession.SessionId);
 
             return true;
         }
