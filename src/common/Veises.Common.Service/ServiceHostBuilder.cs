@@ -62,7 +62,6 @@ namespace Veises.Common.Service
                     services.AddSingleton<IHttpContextProvider, HttpContextProvider>();
 
                     services.AddSingleton<ISystemEnvironment>(provider => new SystemEnvironment(_args));
-                    services.AddSingleton<ISequentGuidGenerator, SequentGuidGenerator>();
                     services.AddSingleton<ITimeService, TimeService>();
 
                     var mvcBuilder = services
