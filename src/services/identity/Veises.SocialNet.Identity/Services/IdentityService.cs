@@ -62,5 +62,12 @@ namespace Veises.SocialNet.Identity.Services
 
             return true;
         }
+
+        public void Logout()
+        {
+            var currentUserAuthInfo = _authService.GetUserInfo();
+            
+            _userSessionStorage.DropSession(currentUserAuthInfo.Uid, currentUserAuthInfo.SessionId);
+        }
     }
 }

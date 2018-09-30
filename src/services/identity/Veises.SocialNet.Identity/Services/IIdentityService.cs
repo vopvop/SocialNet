@@ -8,5 +8,7 @@ namespace Veises.SocialNet.Identity.Services
         bool TryGetCurrent([NotNull] out UserIdentity userIdentity);
 
         bool TryAuthorize([NotNull] string userName, [NotNull] string passwordHash);
+
+        void Logout();
     }
 }

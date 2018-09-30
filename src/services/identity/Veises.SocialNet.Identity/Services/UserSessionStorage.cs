@@ -40,5 +40,18 @@ namespace Veises.SocialNet.Identity.Services
                     return sessionSet;
                 });
         }
+
+        public void DropSession(Guid userId, Guid jwtTokenId)
+        {
+            _sessionSets.AddOrUpdate(
+                userId,
+                (id) => UserSessionSet.Create(id),
+                (id, sessionSet) =>
+                {
+                    sessionSet.DropSession(jwtTokenId);
+                    
+                    return sessionSet;
+                });
+        }
     }
 }

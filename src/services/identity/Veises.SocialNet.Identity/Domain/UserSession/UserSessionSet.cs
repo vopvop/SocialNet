@@ -44,5 +44,10 @@ namespace Veises.SocialNet.Identity.Domain.UserSession
             
             session.Validate();
         }
+
+        public void DropSession(Guid jwtTokenId)
+        {
+            _sessionSet.TryRemove(jwtTokenId, out var _);
+        }
     }
 }

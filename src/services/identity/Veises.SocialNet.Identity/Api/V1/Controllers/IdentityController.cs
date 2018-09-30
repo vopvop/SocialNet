@@ -50,13 +50,13 @@ namespace Veises.SocialNet.Identity.Api.V1.Controllers
         /// Authorize user by login and password.
         /// </remarks>
         /// <returns>Authorization status (success or not).</returns>
-        [HttpPost]
+        [HttpPost("Authorize")]
         [AllowAnonymous]
         [ProducesResponseType((int) HttpStatusCode.NoContent)]
         [ProducesResponseType((int) HttpStatusCode.Forbidden)]
         [ProducesResponseType((int) HttpStatusCode.BadRequest)]
         [UsedImplicitly]
-        public IActionResult Post([NotNull][FromBody] LoginUser loginUser)
+        public IActionResult Authorize([NotNull][FromBody] LoginUser loginUser)
         {
             if (loginUser == null) throw new ArgumentNullException(nameof(loginUser));
             
@@ -71,6 +71,22 @@ namespace Veises.SocialNet.Identity.Api.V1.Controllers
             }
 
             return Forbid();
+        }
+
+        [HttpPost("Logout")]
+        [ProducesResponseType((int) HttpStatusCode.NoContent)]
+        [ProducesResponseType((int) HttpStatusCode.Forbidden)]
+        [UsedImplicitly]
+        public IActionResult Logout()
+        {
+            if (!_identityService.TryGetCurrent(out var userIdentity))
+            {
+                return Forbid();
+            }
+            
+            _identityService.Logout();
+
+            return NoContent();
         }
     }
 }
