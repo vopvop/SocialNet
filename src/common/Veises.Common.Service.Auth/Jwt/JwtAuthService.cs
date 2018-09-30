@@ -1,7 +1,5 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
+using JetBrains.Annotations;
 using Veises.Common.Service.Utils;
 
 namespace Veises.Common.Service.Auth.Jwt
@@ -10,40 +8,47 @@ namespace Veises.Common.Service.Auth.Jwt
     {
         private const string JwtTokenHeaderName = "jwt-token";
 
-        private readonly IUserCredentialsValidator _userCredentialsValidator;
-
+        [NotNull]
         private readonly IHttpContextProvider _httpContextProvider;
 
+        [NotNull]
         private readonly IJwtTokenProvider _jwtTokenProvider;
 
-        public JwtAuthService(IJwtTokenProvider jwtTokenProvider, IHttpContextProvider httpContextProvider)
+        public JwtAuthService(
+            [NotNull] IJwtTokenProvider jwtTokenProvider,
+            [NotNull] IHttpContextProvider httpContextProvider)
         {
             _httpContextProvider = httpContextProvider ?? throw new ArgumentNullException(nameof(httpContextProvider));
             _jwtTokenProvider = jwtTokenProvider ?? throw new ArgumentNullException(nameof(jwtTokenProvider));
         }
 
-        public void Authorize(IUserAuthData userAuthData)
+        public void Authorize(UserAuthData userAuthData)
         {
             if (userAuthData == null)
                 throw new ArgumentNullException(nameof(userAuthData));
 
-            if (!_userCredentialsValidator.IsValid(userAuthData))
-                throw new UnauthorizedAccessException();
+            var jwtToken = _jwtTokenProvider.GetToken(
+                new UserInfo(
+                    userAuthData.SystemId,
+                    userAuthData.Uid));
 
-            var jwtToken = _jwtTokenProvider.GetToken(userAuthData.GetUserSystemName());
-
-            _httpContextProvider.Get().Response.Headers.Add(JwtTokenHeaderName, jwtToken);
+            _httpContextProvider
+                .Get()
+                .Response
+                .Headers
+                .Add(JwtTokenHeaderName, jwtToken);
         }
 
         public UserInfo GetUserInfo()
         {
             var currentUser = _httpContextProvider.Get().User;
+            
+            if (currentUser == null)
+                throw new InvalidOperationException("Current user principal is not defined.");
 
-            var userLoginClaim = currentUser.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            var jwtClaimsModel = JwtClaimsModel.Parse(currentUser);
 
-            var userSystemName = currentUser.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti)?.Value;
-
-            return new UserInfo(userSystemName);
+            return jwtClaimsModel.GetUserInfo();
         }
     }
 }

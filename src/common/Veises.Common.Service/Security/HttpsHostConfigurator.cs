@@ -17,7 +17,7 @@ namespace Veises.Common.Service.Security
 
         public Action<WebHostBuilderContext, IConfigurationBuilder> ConfigureApp() => (context, builder) => { };
 
-        public Action<IServiceCollection> ConfigureServices() => (services) => { };
+        public Action<ServiceCollection> ConfigureServices() => (collection) => { };
 
         public Action<IApplicationBuilder> Configure() => (builder) =>
         {

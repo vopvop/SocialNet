@@ -33,9 +33,9 @@ namespace Veises.Common.Service.Settings
             };
         }
 
-        public Action<IServiceCollection> ConfigureServices()
+        public Action<ServiceCollection> ConfigureServices()
         {
-            return services => { services.AddSingleton(typeof(ISetting<>), typeof(Setting<>)); };
+            return collection => { collection.Services.AddSingleton(typeof(ISetting<>), typeof(Setting<>)); };
         }
     }
 }

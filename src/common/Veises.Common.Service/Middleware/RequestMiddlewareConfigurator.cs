@@ -14,12 +14,12 @@ namespace Veises.Common.Service.Middleware
             return (context, builder) => { };
         }
 
-        public Action<IServiceCollection> ConfigureServices()
+        public Action<ServiceCollection> ConfigureServices()
         {
-            return services =>
+            return collection =>
             {
-                services.AddTransient(typeof(TRequestMiddleware));
-                services.AddTransient(typeof(RequestMiddlewareWrapper<TRequestMiddleware>));
+                collection.Services.AddTransient(typeof(TRequestMiddleware));
+                collection.Services.AddTransient(typeof(RequestMiddlewareWrapper<TRequestMiddleware>));
             };
         }
 

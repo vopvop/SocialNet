@@ -3,14 +3,14 @@
 namespace Veises.SocialNet.Identity.Api.V1.Models
 {
     /// <summary>
-    /// Logoff user model
+    /// User information
     /// </summary>
-    public sealed class LogoffUser
+    public sealed class UserInfo
     {
         /// <summary>
-        /// User unique identifier
+        /// User identity information
         /// </summary>
         [Required]
-        public UserUidInfo UserUidInfo { get; set; }
+        public UserIdentity Identity { get; set; }
     }
 }

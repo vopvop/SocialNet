@@ -42,13 +42,14 @@ namespace Veises.Common.Service.Swagger
 
         public Action<WebHostBuilderContext, IConfigurationBuilder> ConfigureApp() => (context, config) => { };
 
-        public Action<IServiceCollection> ConfigureServices() => services =>
+        public Action<ServiceCollection> ConfigureServices() => collection =>
         {
-            services.AddMvc();
+            collection.Services.AddMvc();
 
-            services.AddSwaggerGen(c =>
+            collection.Services.AddSwaggerGen(c =>
             {
-                var provider = services
+                var provider = collection
+                    .Services
                     .BuildServiceProvider()
                     .GetRequiredService<IApiVersionDescriptionProvider>();
 

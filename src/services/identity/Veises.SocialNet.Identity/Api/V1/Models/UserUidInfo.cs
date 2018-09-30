@@ -1,16 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
 
 namespace Veises.SocialNet.Identity.Api.V1.Models
 {
     /// <summary>
-    /// Logoff user model
+    /// User unique identifier
     /// </summary>
-    public sealed class LogoffUser
+    public sealed class UserUidInfo
     {
         /// <summary>
         /// User unique identifier
         /// </summary>
-        [Required]
-        public UserUidInfo UserUidInfo { get; set; }
+        public Guid Uid;
     }
 }

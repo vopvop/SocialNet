@@ -10,10 +10,10 @@ namespace Veises.Common.Service.Utils
     {
         public Action<WebHostBuilderContext, IConfigurationBuilder> ConfigureApp() => (context, builder) => { };
 
-        public Action<IServiceCollection> ConfigureServices() => (services) =>
+        public Action<ServiceCollection> ConfigureServices() => (collection) =>
         {
-            services.AddTransient<SessionIdProvider>();
-            services.AddTransient<ISessionInfoProvider, SessionInfoProvider>();
+            collection.Services.AddTransient<SessionIdProvider>();
+            collection.Services.AddTransient<ISessionInfoProvider, SessionInfoProvider>();
         };
 
         public Action<IApplicationBuilder> Configure() => (builder) => { };

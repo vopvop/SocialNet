@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Veises.Common.Service.Utils;
 
@@ -20,7 +21,7 @@ namespace Veises.Common.Service
 
         private readonly ICollection<IHostConfigurator> _hostConfigurators;
 
-        public ServiceHostBuilder(IReadOnlyCollection<Assembly> assemblies, params string[] args)
+        public ServiceHostBuilder([NotNull] IReadOnlyCollection<Assembly> assemblies, params string[] args)
         {
             _assemblies = assemblies ?? throw new ArgumentNullException(nameof(assemblies));
             _args = args;
@@ -33,6 +34,8 @@ namespace Veises.Common.Service
 
         public ServiceHost Build()
         {
+            IConfiguration configuration = null;
+            
             var webHost = WebHost
                 .CreateDefaultBuilder()
                 .UseKestrel()
@@ -50,6 +53,8 @@ namespace Veises.Common.Service
                         {
                             hostConfigurator.ConfigureApp()(context, config);
                         }
+
+                        configuration = config.Build();
                     })
                 .ConfigureServices(services =>
                 {
@@ -57,6 +62,7 @@ namespace Veises.Common.Service
                     services.AddSingleton<IHttpContextProvider, HttpContextProvider>();
 
                     services.AddSingleton<ISystemEnvironment>(provider => new SystemEnvironment(_args));
+                    services.AddSingleton<ISequentGuidGenerator, SequentGuidGenerator>();
                     services.AddSingleton<ITimeService, TimeService>();
 
                     var mvcBuilder = services
@@ -64,15 +70,17 @@ namespace Veises.Common.Service
                         .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                         .AddJsonFormatters()
                         .AddXmlSerializerFormatters();
+                    
+                    var collection = new ServiceCollection(services, configuration);
+
+                    foreach (var hostConfigurator in _hostConfigurators)
+                    {
+                        hostConfigurator.ConfigureServices()(collection);
+                    }
 
                     foreach (var assembly in _assemblies)
                     {
                         mvcBuilder.AddApplicationPart(assembly);
-                    }
-
-                    foreach (var hostConfigurator in _hostConfigurators)
-                    {
-                        hostConfigurator.ConfigureServices()(services);
                     }
                 })
                 .Configure(builder =>

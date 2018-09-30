@@ -1,13 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <Import Project="..\..\netcore.2.1.props.xml"/>
-
-    <ItemGroup>
-        <ProjectReference Include="..\Veises.Common.Service\Veises.Common.Service.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.1"/>
-    </ItemGroup>
-
+  <Import Project="..\..\netcore.2.1.props.xml" />
+  <ItemGroup>
+    <ProjectReference Include="..\Veises.Common.Service\Veises.Common.Service.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.1" />
+  </ItemGroup>
 </Project>

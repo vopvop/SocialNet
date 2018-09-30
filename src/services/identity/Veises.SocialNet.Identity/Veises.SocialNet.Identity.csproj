@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-    <Import Project="..\..\..\netcore.2.1.exe.props.xml"/>
+    <Import Project="..\..\..\netcore.2.1.exe.props.xml" />
 
     <PropertyGroup>
         <StartupObject>Veises.SocialNet.Identity.Program</StartupObject>
     </PropertyGroup>
 
     <ItemGroup>
-        <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0"/>
+        <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\common\Veises.Common.Service\Veises.Common.Service.csproj"/>
-        <ProjectReference Include="..\..\..\common\Veises.Common.Service.Auth\Veises.Common.Service.Auth.csproj"/>
-        <ProjectReference Include="..\..\..\common\Veises.Common.Service.Swagger\Veises.Common.Service.Swagger.csproj"/>
-        <ProjectReference Include="..\..\..\common\Veises.Common.Service.Versionning\Veises.Common.Service.Versionning.csproj"/>
+        <ProjectReference Include="..\..\..\common\Veises.Common.Service\Veises.Common.Service.csproj" />
+        <ProjectReference Include="..\..\..\common\Veises.Common.Service.Auth\Veises.Common.Service.Auth.csproj" />
+        <ProjectReference Include="..\..\..\common\Veises.Common.Service.Swagger\Veises.Common.Service.Swagger.csproj" />
+        <ProjectReference Include="..\..\..\common\Veises.Common.Service.Versionning\Veises.Common.Service.Versionning.csproj" />
     </ItemGroup>
 
 </Project>

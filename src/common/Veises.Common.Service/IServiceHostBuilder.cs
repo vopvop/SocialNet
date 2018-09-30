@@ -1,9 +1,13 @@
-﻿namespace Veises.Common.Service
+﻿using JetBrains.Annotations;
+
+namespace Veises.Common.Service
 {
     public interface IServiceHostBuilder
     {
-        IServiceHostBuilder Configure(IHostConfigurator hostConfigurator);
+        [NotNull]
+        IServiceHostBuilder Configure([NotNull] IHostConfigurator hostConfigurator);
 
+        [NotNull]
         ServiceHost Build();
     }
 }

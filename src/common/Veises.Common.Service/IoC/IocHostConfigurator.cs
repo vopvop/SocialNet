@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,9 +12,10 @@ namespace Veises.Common.Service.IoC
 {
     internal sealed class IocHostConfigurator : IHostConfigurator
     {
+        [NotNull]
         private readonly Assembly _sourceAssembly;
 
-        public IocHostConfigurator(Assembly sourceAssembly)
+        public IocHostConfigurator([NotNull] Assembly sourceAssembly)
         {
             _sourceAssembly = sourceAssembly ?? throw new ArgumentNullException(nameof(sourceAssembly));
         }
@@ -23,9 +25,9 @@ namespace Veises.Common.Service.IoC
             return (context, builder) => { };
         }
 
-        public Action<IServiceCollection> ConfigureServices()
+        public Action<ServiceCollection> ConfigureServices()
         {
-            return services =>
+            return collection =>
             {
                 var injections = GetDependencyInjections();
 
@@ -33,13 +35,13 @@ namespace Veises.Common.Service.IoC
                     switch (injection.Scope)
                     {
                         case DependencyScope.Scoped:
-                            services.AddScoped(injection.Service, injection.Implementation);
+                            collection.Services.AddScoped(injection.Service, injection.Implementation);
                             break;
                         case DependencyScope.Singleton:
-                            services.AddSingleton(injection.Service, injection.Implementation);
+                            collection.Services.AddSingleton(injection.Service, injection.Implementation);
                             break;
                         case DependencyScope.Transient:
-                            services.AddTransient(injection.Service, injection.Implementation);
+                            collection.Services.AddTransient(injection.Service, injection.Implementation);
                             break;
                         default:
                             throw new ArgumentException($"Unknown injection scope type {injection.Scope.Escaped()}.");

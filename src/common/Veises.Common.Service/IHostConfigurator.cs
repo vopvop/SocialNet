@@ -1,17 +1,20 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System;
+using JetBrains.Annotations;
 
 namespace Veises.Common.Service
 {
     public interface IHostConfigurator
     {
-		Action<WebHostBuilderContext, IConfigurationBuilder> ConfigureApp();
+        [NotNull]
+        Action<WebHostBuilderContext, IConfigurationBuilder> ConfigureApp();
 
-		Action<IServiceCollection> ConfigureServices();
+        [NotNull]
+        Action<ServiceCollection> ConfigureServices();
 
-		Action<IApplicationBuilder> Configure();
+        [NotNull]
+        Action<IApplicationBuilder> Configure();
     }
 }

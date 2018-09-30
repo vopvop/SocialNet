@@ -1,17 +1,29 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
+using JetBrains.Annotations;
 
 namespace Veises.Common.Service.Auth.Jwt
 {
     internal sealed class JwtConfig
     {
-        public readonly string Audience;
+        [NotNull]
+        public string Audience { get; }
 
-        public readonly string Issuer;
+        [NotNull]
+        public string Issuer { get; }
 
-        public readonly byte[] Key;
+        [NotNull]
+        public byte[] Key { get; }
 
-        public JwtConfig(string issuer, string audience, string key)
+        public JwtConfig([NotNull] string issuer, [NotNull] string audience, [NotNull] string key)
         {
+            if (string.IsNullOrEmpty(issuer))
+                throw new ArgumentException("JWT issuer is not defined.");
+            if (string.IsNullOrEmpty(audience))
+                throw new ArgumentException("JWT audience is not defined.");
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentException("JWT token key is not defined.");
+            
             Issuer = issuer;
             Audience = audience;
             Key = Encoding.UTF8.GetBytes(key);

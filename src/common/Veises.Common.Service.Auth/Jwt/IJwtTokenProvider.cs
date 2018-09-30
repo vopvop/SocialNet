@@ -1,7 +1,10 @@
-﻿namespace Veises.Common.Service.Auth.Jwt
+﻿using JetBrains.Annotations;
+
+namespace Veises.Common.Service.Auth.Jwt
 {
     internal interface IJwtTokenProvider
     {
-        string GetToken(string userSystemName);
+        [NotNull]
+        string GetToken([NotNull] UserInfo userInfo);
     }
 }

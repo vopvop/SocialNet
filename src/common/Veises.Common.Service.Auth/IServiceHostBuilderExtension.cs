@@ -1,10 +1,13 @@
 ﻿using System;
+using JetBrains.Annotations;
+using Veises.Common.Service.Auth.Jwt;
 
 namespace Veises.Common.Service.Auth
 {
     public static class IServiceHostBuilderExtension
     {
-        public static IServiceHostBuilder WithJwtAuth(this IServiceHostBuilder serviceHostBuilder)
+        [NotNull]
+        public static IServiceHostBuilder WithJwtAuth([NotNull] this IServiceHostBuilder serviceHostBuilder)
         {
             if (serviceHostBuilder == null)
                 throw new ArgumentNullException(nameof(serviceHostBuilder));
