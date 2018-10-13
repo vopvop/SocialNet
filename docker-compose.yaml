@@ -3,6 +3,8 @@ version: "3.3"
 services:
   
   identity:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,8 +14,8 @@ services:
     environment:
       ASPNETCORE_URLS: http://+:80;https://+:443;
       ASPNETCORE_HTTPS_PORT: 50081
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /root/https/aspnetapp.pfx
-      ASPNETCORE_Kestrel__Certificates__Default__Password: P@ssw0rd
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/root/https/aspnetapp.pfx"
+      ASPNETCORE_Kestrel__Certificates__Default__Password: $CERT_PASS
     volumes:
       - https:/root/https
     networks:
