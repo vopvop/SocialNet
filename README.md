@@ -32,9 +32,9 @@ Our social network architecture will consider the next microservices list:
 1. Load balancer (not in scope of this project).
 ## Frameworks and Tools
 The requirements for dev tools and frameworks should be as low as possible (and cheap):
-* IDE: Visual Studio 2017 (free Community or Code edition should be enough);
-* Main microservice framework: Microsoft ASP.NET Core 2.0 + Yeoman project generator;
-* Microservice REST API discoverer: Swagger 2.0;
+* IDE: Microsoft Visual Studio 2017 (free Community or Code edition should be enough);
+* Main microservice framework: Microsoft ASP.NET Core 2.1 + Yeoman project generator;
+* Microservice REST API discoverer: Swagger 2.0 or higher;
 * Fronetnd framework: Angular 2, TypeScript;
 ## Data transfer
 ### API
@@ -47,6 +47,8 @@ Default data transfet protocol types:
 * XML.
 
 Then it can be reviewed and redesigned with Google Protobuf or some similar more efficient data exchange protocol type.
+## Deployment
+Solution should support such automated deployment infrastructure as Docker.
 # RTFM
 ## Books
 * Microsoft's .NET Microservices. Architecture for Containerized .NET Applications (<i>free ebook without registration and SMS</i>): https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/
