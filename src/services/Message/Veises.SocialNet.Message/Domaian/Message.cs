@@ -6,7 +6,7 @@ namespace Veises.SocialNet.Message.Domaian
 {
     internal sealed class Message : IEntity
     {
-        private static readonly ILogFor<Message> Log = LogServiceProvider.GetLogFor<Message>();
+        private static readonly ILog Log = LogProvider.GetLogFor<Message>();
 
         private Message(Guid id, string content, DateTime createdUtc)
         {

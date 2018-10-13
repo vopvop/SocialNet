@@ -1,0 +1,31 @@
+version: "3.3"
+
+services:
+  
+  identity:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 50080:80
+      - 50081:443
+    environment:
+      ASPNETCORE_URLS: http://+:80;https://+:443;
+      ASPNETCORE_HTTPS_PORT: 50081
+      ASPNETCORE_Kestrel__Certificates__Default__Path: /root/https/aspnetapp.pfx
+      ASPNETCORE_Kestrel__Certificates__Default__Password: P@ssw0rd
+    volumes:
+      - https:/root/https
+    networks:
+      - apiNet
+      
+volumes:
+  https:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /User/.aspnet/https # Docker toolbox hared folder mapped to current user folder
+
+networks:
+  apiNet:

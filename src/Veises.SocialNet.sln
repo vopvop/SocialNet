@@ -40,14 +40,22 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veises.Common", "common\Veises.Common\Veises.Common.csproj", "{C476981A-49A7-4649-A2B6-6DB62757B1EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{D023FA79-2174-44AF-AA17-378D58FC2576}"
-ProjectSection(SolutionItems) = preProject
-	common.props.xml = common.props.xml
-	netstandard.props.xml = netstandard.props.xml
-	netcore.2.1.props.xml = netcore.2.1.props.xml
-	netcore.2.1.exe.props.xml = netcore.2.1.exe.props.xml
-EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Veises.Common.Service.Swagger", "common\Veises.Common.Service.Swagger\Veises.Common.Service.Swagger.csproj", "{DDEBB4A9-16D6-4B0F-9605-D97E41350BD2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Props", "Props", "{478596C2-76DF-486D-BD36-93937F4723E8}"
+ProjectSection(SolutionItems) = preProject
+	common.props.xml = common.props.xml
+	netcore.2.1.exe.props.xml = netcore.2.1.exe.props.xml
+	netcore.2.1.props.xml = netcore.2.1.props.xml
+	netstandard.props.xml = netstandard.props.xml
+EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{9480925E-F4D3-41F8-90F1-B9AB40D9736D}"
+ProjectSection(SolutionItems) = preProject
+	..\docker-compose.yaml = ..\docker-compose.yaml
+	..\Dockerfile = ..\Dockerfile
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -124,6 +132,8 @@ Global
 		{90E7B664-FD1F-4451-83BA-0BB7E90BE454} = {DC3AD24F-25CC-45F5-AF20-AFC6309FFE98}
 		{C476981A-49A7-4649-A2B6-6DB62757B1EF} = {24AA06AA-D3F4-44C1-B9C9-3EA0F2ACEF45}
 		{DDEBB4A9-16D6-4B0F-9605-D97E41350BD2} = {24AA06AA-D3F4-44C1-B9C9-3EA0F2ACEF45}
+		{478596C2-76DF-486D-BD36-93937F4723E8} = {D023FA79-2174-44AF-AA17-378D58FC2576}
+		{9480925E-F4D3-41F8-90F1-B9AB40D9736D} = {D023FA79-2174-44AF-AA17-378D58FC2576}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB1024D4-62FF-400E-B244-BB2EB1085D56}

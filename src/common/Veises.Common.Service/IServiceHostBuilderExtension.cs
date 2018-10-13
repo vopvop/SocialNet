@@ -31,7 +31,7 @@ namespace Veises.Common.Service
 
             return serviceHostBuilder.Configure(new LoggingHostConfigurator());
         }
-
+        
         public static IServiceHostBuilder WithAssemblyDependencies(this IServiceHostBuilder serviceHostBuilder,
             Assembly assembly)
         {

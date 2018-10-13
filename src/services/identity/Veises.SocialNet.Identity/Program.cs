@@ -19,6 +19,7 @@ namespace Veises.SocialNet.Identity
                 .WithSwagger("SocialNet Identity", "Veises Social Net Identity Service")
                 .WithJwtAuth()
                 .WithAssemblyDependencies(typeof(Program).Assembly)
+                .WithHttps(useForDev: true)
                 .Build())
             {
                 serviceHost.Run();
