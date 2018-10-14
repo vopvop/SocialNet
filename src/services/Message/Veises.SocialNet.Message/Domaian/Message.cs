@@ -1,6 +1,6 @@
 ﻿using System;
 using Veises.Common.Extensions;
-using Veises.Common.Service.Log;
+using Veises.Common.Logging;
 
 namespace Veises.SocialNet.Message.Domaian
 {
@@ -30,7 +30,7 @@ namespace Veises.SocialNet.Message.Domaian
 
             var message = new Message(id, content, createdUtc);
 
-            Log.WriteInfo($"Message {id.Escaped()} was created.");
+            Log.LogInfo($"Message {id.Escaped()} was created.");
 
             return message;
         }
@@ -41,7 +41,7 @@ namespace Veises.SocialNet.Message.Domaian
 
             ModifiedUtc = modifiedUtc;
 
-            Log.WriteInfo($"Message {Id.Escaped()} was updated.");
+            Log.LogInfo($"Message {Id.Escaped()} was updated.");
         }
     }
 }

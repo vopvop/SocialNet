@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Veises.Common.Service.IoC;
-using Veises.Common.Service.Log;
+using Veises.Common.Service.Logging;
 using Veises.Common.Service.Middleware;
 using Veises.Common.Service.Security;
 using Veises.Common.Service.Settings;
@@ -29,7 +29,7 @@ namespace Veises.Common.Service
         {
             if (serviceHostBuilder == null) throw new ArgumentNullException(nameof(serviceHostBuilder));
 
-            return serviceHostBuilder.Configure(new LoggingHostConfigurator());
+            return serviceHostBuilder.Configure(new LogHostConfigurator());
         }
         
         public static IServiceHostBuilder WithAssemblyDependencies(this IServiceHostBuilder serviceHostBuilder,

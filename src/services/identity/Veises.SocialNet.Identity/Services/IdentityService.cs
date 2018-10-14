@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using Veises.Common.Logging;
 using Veises.Common.Service.Auth;
 using Veises.Common.Service.IoC;
 using Veises.SocialNet.Identity.Api.V1.Models;
@@ -10,6 +11,8 @@ namespace Veises.SocialNet.Identity.Services
     [InjectDependency(DependencyScope.Singleton)]
     internal sealed class IdentityService : IIdentityService
     {
+        private static readonly ILog Log = LogProvider.GetLogFor<IdentityService>();
+        
         [NotNull] private readonly IAuthService _authService;
 
         [NotNull] private readonly UserCredentialStorage _userCredentialStorage;
@@ -42,7 +45,7 @@ namespace Veises.SocialNet.Identity.Services
                     Uid = userCredential.GetId()
                 }
             };
-
+            
             return true;
         }
 
@@ -51,7 +54,9 @@ namespace Veises.SocialNet.Identity.Services
             var userCredential = _userCredentialStorage.Get(userName);
 
             if (!userCredential.IsPasswordValid(passwordHash))
+            {
                 return false;
+            }
 
             var authSession = _authService.Authorize(
                 new UserAuthData(
@@ -59,6 +64,8 @@ namespace Veises.SocialNet.Identity.Services
                     userCredential.GetUserLogin()));
             
             _userSessionStorage.AddOrUpdate(userCredential.GetId(), authSession.SessionId);
+            
+            Log.LogInfo($"User authenticated. Login='{userCredential.GetUserLogin()}', Uid='{userCredential.GetId()}'.");
 
             return true;
         }
@@ -68,6 +75,8 @@ namespace Veises.SocialNet.Identity.Services
             var currentUserAuthInfo = _authService.GetUserInfo();
             
             _userSessionStorage.DropSession(currentUserAuthInfo.Uid, currentUserAuthInfo.SessionId);
+            
+            Log.LogInfo($"User logged out. Login='{currentUserAuthInfo.Login}', Uid='{currentUserAuthInfo.Uid}'.");
         }
     }
 }

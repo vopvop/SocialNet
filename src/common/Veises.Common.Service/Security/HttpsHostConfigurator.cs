@@ -3,14 +3,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Veises.Common.Service.Log;
 
 namespace Veises.Common.Service.Security
 {
     internal sealed class HttpsHostConfigurator : IHostConfigurator
     {
-        private static readonly ILog Log = LogProvider.GetLogFor<HttpsHostConfigurator>();
-        
         private readonly bool _useForDev;
 
         public HttpsHostConfigurator(bool useForDev)
@@ -33,8 +30,6 @@ namespace Veises.Common.Service.Security
                 builder.UseHsts();
                 
                 builder.UseHttpsRedirection();
-                
-                Log.WriteDebug("HTTPS enabled.");
             }
         };
     }
