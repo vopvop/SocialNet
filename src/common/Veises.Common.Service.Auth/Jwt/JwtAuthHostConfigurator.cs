@@ -25,6 +25,7 @@ namespace Veises.Common.Service.Auth.Jwt
             return collection =>
             {
                 collection.Services.AddSingleton<IAuthService, JwtAuthService>();
+                collection.Services.AddSingleton<IAuthInfoProvider, JwtAuthInfoProvider>();
                 collection.Services.AddSingleton<IJwtAuthConfigProvider, JwtAuthConfigProvider>();
                 collection.Services.AddSingleton<IJwtTokenProvider, JwtTokenProvider>();
 

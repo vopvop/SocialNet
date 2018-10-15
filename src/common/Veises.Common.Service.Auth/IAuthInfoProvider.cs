@@ -2,9 +2,9 @@
 
 namespace Veises.Common.Service.Auth
 {
-    public interface IAuthService
+    public interface IAuthInfoProvider
     {
         [NotNull]
-        AuthSession Authorize([NotNull] UserAuthData userAuthData);
+        UserInfo GetAuthInfo();
     }
 }

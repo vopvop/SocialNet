@@ -18,8 +18,8 @@ namespace Veises.Common.Service.Middleware
         {
             return collection =>
             {
-                collection.Services.AddTransient(typeof(TRequestMiddleware));
-                collection.Services.AddTransient(typeof(RequestMiddlewareWrapper<TRequestMiddleware>));
+                collection.Services.AddSingleton(typeof(TRequestMiddleware));
+                collection.Services.AddSingleton(typeof(RequestMiddlewareWrapper<TRequestMiddleware>));
             };
         }
 

@@ -37,7 +37,7 @@ namespace Veises.Common.Service.Auth.Jwt
         public static JwtClaimsModel Parse([NotNull] ClaimsPrincipal claimsPrincipal)
         {
             if (claimsPrincipal == null) throw new ArgumentNullException(nameof(claimsPrincipal));
-
+            
             if (claimsPrincipal.HasClaim(c => c.Type == JwtRegisteredClaimNames.Jti) &&
                 claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.NameIdentifier) &&
                 claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.Name))

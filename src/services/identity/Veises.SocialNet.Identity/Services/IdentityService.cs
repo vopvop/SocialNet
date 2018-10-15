@@ -12,26 +12,34 @@ namespace Veises.SocialNet.Identity.Services
     internal sealed class IdentityService : IIdentityService
     {
         private static readonly ILog Log = LogProvider.GetLogFor<IdentityService>();
+
+        [NotNull]
+        private readonly IAuthInfoProvider _authInfoProvider;
         
-        [NotNull] private readonly IAuthService _authService;
+        [NotNull]
+        private readonly IAuthService _authService;
 
-        [NotNull] private readonly UserCredentialStorage _userCredentialStorage;
+        [NotNull]
+        private readonly UserCredentialStorage _userCredentialStorage;
 
-        [NotNull] private readonly UserSessionStorage _userSessionStorage;
+        [NotNull]
+        private readonly UserSessionStorage _userSessionStorage;
 
         public IdentityService(
             [NotNull] IAuthService authService,
             [NotNull] UserCredentialStorage userCredentialStorage,
-            [NotNull] UserSessionStorage userSessionStorage)
+            [NotNull] UserSessionStorage userSessionStorage,
+            [NotNull] IAuthInfoProvider authInfoProvider)
         {
             _authService = authService ?? throw new ArgumentNullException(nameof(authService));
             _userCredentialStorage = userCredentialStorage ?? throw new ArgumentNullException(nameof(userCredentialStorage));
             _userSessionStorage = userSessionStorage ?? throw new ArgumentNullException(nameof(userSessionStorage));
+            _authInfoProvider = authInfoProvider ?? throw new ArgumentNullException(nameof(authInfoProvider));
         }
 
         public bool TryGetCurrent(out UserIdentity userIdentity)
         {
-            var currentUserInfo = _authService.GetUserInfo();
+            var currentUserInfo = _authInfoProvider.GetAuthInfo();
 
             var userCredential = _userCredentialStorage.Get(currentUserInfo.Login);
             
@@ -72,7 +80,7 @@ namespace Veises.SocialNet.Identity.Services
 
         public void Logout()
         {
-            var currentUserAuthInfo = _authService.GetUserInfo();
+            var currentUserAuthInfo = _authInfoProvider.GetAuthInfo();
             
             _userSessionStorage.DropSession(currentUserAuthInfo.Uid, currentUserAuthInfo.SessionId);
             

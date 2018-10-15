@@ -20,6 +20,7 @@ namespace Veises.SocialNet.Identity
                 .WithJwtAuth()
                 .WithAssemblyDependencies(typeof(Program).Assembly)
                 .WithHttps(useForDev: true)
+                .WithSessionId()
                 .Build())
             {
                 serviceHost.Run();

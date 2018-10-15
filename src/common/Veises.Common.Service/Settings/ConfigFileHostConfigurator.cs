@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,7 @@ namespace Veises.Common.Service.Settings
 
         private readonly string _fileName;
 
-        public ConfigFileHostConfigurator(string fileName)
+        public ConfigFileHostConfigurator([NotNull] string fileName)
         {
             _fileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
         }
